@@ -65,7 +65,9 @@ export default class Works extends Component {
     
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
+
 <Text  color='#6787A0' >Home!</Text>
+
 <Icon name="battery-full" size={30} color="#6787A0" />
 <Icon name="battery-three-quarters" size={30} color="#900" />
 <Icon name="battery-half" size={30} color="#900" />
