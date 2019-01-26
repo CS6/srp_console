@@ -33,8 +33,10 @@ componentDidMount() {
     return (
     
    
-  <TouchableOpacity onPress={() => { this.props.navigation.navigate('Registered') }}>
-        <View style={styles.searchBox}>
+  // <TouchableOpacity onPress={() => { this.props.navigation.navigate('Registered') }}>
+  <TouchableOpacity onPress={() => { this.componentDidMount()}}>
+
+<View style={styles.searchBox}>
           <Image source={require('../../img/search.png')} style={styles.searchIcon} />
           <Text style={styles.searchContent}> 生 態 組 </Text>
           <Text style={styles.welcome}>

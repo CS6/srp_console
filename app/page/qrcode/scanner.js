@@ -19,6 +19,9 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import { SafeAreaView, } from 'react-navigation';
 import Qrcode from './qrcode';
 
+//https://www.jianshu.com/p/4bf6a976659d
+//http://www.hangge.com/blog/cache/detail_1614.html
+//React Native - 使用NetInfo獲取網絡信息（是否聯網、當前網絡狀態）
 
 
 // 取得屏幕的宽高Dimensions
