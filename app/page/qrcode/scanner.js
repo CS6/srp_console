@@ -85,11 +85,15 @@ export default class Scanner extends Component {
     this.setState.text = '"'+e.data + '"';
     console.log('data', data);
     // Alert.alert('data', data);
+  
     Alert.alert(
       'Alert Title',
       data,
       [
-        { text: 'Ask me later', onPress: () => this.onClickAJumpToB() },
+        { text: 'Ask me later', onPress: () => {
+          url=data;
+          this.setState({url: url})
+        }},
         { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
         { text: 'OK', onPress: () => this.GC_data() },
 
@@ -120,7 +124,7 @@ export default class Scanner extends Component {
           title="send url"
           onPress={ ()=> {
             url=data;
-            this.setState({cnt: counter})
+            this.setState({url: url})
           }}
         />
         <QRCodeScanner

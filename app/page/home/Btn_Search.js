@@ -1,9 +1,34 @@
 import React from 'react';
-import { Button,StyleSheet,TouchableOpacity,Image,Text ,View,Dimensions} from 'react-native';
+import { Button,  NetInfo,  StyleSheet,TouchableOpacity,Image,Text ,View,Dimensions} from 'react-native';
 import { withNavigation } from 'react-navigation';
 const { width, height } = Dimensions.get('window');
 
 class Btn_Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        isConnected: null,
+        connectionInfo: null
+    };
+}
+
+//页面的组件渲染完毕（render）之后执行
+componentDidMount() {
+    //检测网络是否连接
+    NetInfo.isConnected.fetch().done((isConnected) => {
+        this.setState({isConnected});
+    });
+
+    //检测网络连接信息
+    NetInfo.fetch().done((connectionInfo) => {
+        this.setState({connectionInfo});
+    });
+
+    //监听网络变化事件
+    NetInfo.addEventListener('change', (networkType) => {
+        this.setState({isConnected: networkType})
+    })
+}
   render() {
     return (
     
@@ -12,7 +37,16 @@ class Btn_Search extends React.Component {
         <View style={styles.searchBox}>
           <Image source={require('../../img/search.png')} style={styles.searchIcon} />
           <Text style={styles.searchContent}> 生 態 組 </Text>
-          <Image source={require('../../img/search.png')} style={styles.searchIcon} />
+          <Text style={styles.welcome}>
+                    {/* 当前网络连接类型： */}
+                     {this.state.connectionInfo}
+                </Text>
+          <Text style={styles.welcome}>
+                    {/* 当前的网络状态： */}
+                    {this.state.isConnected ? '網路使用中': '沒有網路'}
+                </Text>
+               
+                
 
         </View>
       </TouchableOpacity>

@@ -116,14 +116,14 @@ export default class qrcode extends Component {
               onChangeText={(text) => this.setState({text: text})}
               value={this.state.text}
             />
-            <QRCode
+            {/* <QRCode
               value={this.state.text}
               size={200}
               bgColor='black'
               fgColor='white'/>
                <Button
             title="Go to Home"
-            onPress={() => this.props.navigation.navigate('Home')}/>
+            onPress={() => this.props.navigation.navigate('Home')}/> */}
   </View>
           </SafeAreaView>
     
