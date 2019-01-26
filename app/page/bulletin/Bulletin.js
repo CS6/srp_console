@@ -17,6 +17,7 @@ import ScrollableTabView, { ScrollableTabBar, DefaultTabBar } from 'react-native
 import { SafeAreaView, } from 'react-navigation';
 
 import ToDay from './ToDay';
+import Works from './Works';
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 
@@ -28,12 +29,10 @@ export default class Bulletin extends Component {
   static navigationOptions = {
     // headerTitle instead of title
     // headerTitle: <Top />,
-    
-    title: 'qrcode',
+    title: '首頁',
     headerStyle: {
       // backgroundColor: '#f4511e',
       backgroundColor: '#F0C0AB',
-      activeTintColor='#2562b4'    
 
       
       },
@@ -42,6 +41,7 @@ export default class Bulletin extends Component {
     }, // android 中TabBar下面会显示一条线，高度设为 0 后就不显示线了， 不知道还有没有其它方法隐藏？？？
     headerColor:"red",
     
+  
     headerTitleStyle:{flex:1, textAlign: 'center'},
     headerRight:(  //定义导航栏右侧的按钮
       // <Text style={{width:1}}></Text>
@@ -85,10 +85,10 @@ export default class Bulletin extends Component {
           //tabBarBackgroundColor='#fff'
           tabBarBackgroundColor='#Fefefe'
           tabBarActiveTextColor='#6787A0'
-          activeTintColor='#2562b4'    
+          tabBarUnderlineStyle='#2562b4'
+          tabBarInactiveTextColor='#333'
 
           ///修改 今日公告 公事 tabber 顏色 
-          tabBarInactiveTextColor='#333'
           tabBarUnderlineStyle={styles.tabBarUnderline}
         >
               {/* label: ['推荐', '新品', '居家', '餐厨', '配件', '服装', '电器', '洗护', '杂货', '饮食', '婴童', '志趣'], */}
@@ -101,7 +101,7 @@ export default class Bulletin extends Component {
                 
                 case '今日工事':
                   return (
-                    <ToDay tabLabel={item} key={index} />
+                    <Works tabLabel={item} key={index} />
                   )
                   break;
                 case '公告':
@@ -112,7 +112,7 @@ export default class Bulletin extends Component {
                 
                 default:
                   return (
-                    <ToDay tabLabel={item} key={index} />
+                    <Works tabLabel={item} key={index} />
                   )
                   break;
               }
@@ -151,4 +151,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  tabBarUnderline: {
+    backgroundColor: '#2562b4',
+    height: 3,
+    width: width/4,
+
+    // marginLeft: 6
+              ///修改 今日公告 公事 tabber  下底線 顏色 
+
+  }
 });

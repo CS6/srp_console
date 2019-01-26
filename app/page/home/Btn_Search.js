@@ -11,7 +11,9 @@ class Btn_Search extends React.Component {
   <TouchableOpacity onPress={() => { this.props.navigation.navigate('Registered') }}>
         <View style={styles.searchBox}>
           <Image source={require('../../img/search.png')} style={styles.searchIcon} />
-          <Text style={styles.searchContent}>搜尋欄位</Text>
+          <Text style={styles.searchContent}> 生 態 組 </Text>
+          <Image source={require('../../img/search.png')} style={styles.searchIcon} />
+
         </View>
       </TouchableOpacity>
  

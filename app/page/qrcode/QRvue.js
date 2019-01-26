@@ -74,10 +74,10 @@ export default class qrcode extends Component {
 
         <ScrollableTabView
           renderTabBar={() => <ScrollableTabBar />}
-          //tabBarBackgroundColor='#fff'
-          tabBarUnderlineStyle='#8BA812'
           tabBarBackgroundColor='#fff'
-          tabBarActiveTextColor='#8BA812'
+          tabBarActiveTextColor='#6787A0'
+          tabBarUnderlineStyle='#2562b4'
+
           tabBarInactiveTextColor='#333'
 
 
@@ -144,9 +144,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   tabBarUnderline: {
-    backgroundColor: '#8BA812',
-    height: 2,
-    // width: width /4,
+    backgroundColor: '#2562b4',
+    height: 3,
+    width: width/3,
     // marginLeft: 6
   }
 });

@@ -79,6 +79,7 @@ class index_Screen extends React.Component {
 
 
 export default createBottomTabNavigator({
+  Bulletin:{screen:Bulletin},
 
   info: { screen: Webview },
 
@@ -86,7 +87,6 @@ export default createBottomTabNavigator({
   Other: { screen: Otherpage },
   QRcode:{screen:QRcode},
   otherHpage:{screen:otherHpage},
-  Bulletin:{screen:Bulletin}
   // Registered:{screen:Registered}
 
 
@@ -134,7 +134,7 @@ export default createBottomTabNavigator({
     ///下方tab bar icon 顏色 
 
     tabBarOptions: {
-      activeTintColor: '#7CC5FF',
+      activeTintColor: '#6787A0',
       inactiveTintColor: '#7C7C7C',
       style: {
         backgroundColor: '#EFEFEF',
