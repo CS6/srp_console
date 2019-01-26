@@ -12,6 +12,12 @@ class Btn_Search extends React.Component {
     };
 }
 
+//https://www.jianshu.com/p/4bf6a976659d
+//http://www.hangge.com/blog/cache/detail_1614.html
+//React Native - 使用NetInfo獲取網絡信息（是否聯網、當前網絡狀態）
+
+
+
 //页面的组件渲染完毕（render）之后执行
 componentDidMount() {
     //检测网络是否连接
