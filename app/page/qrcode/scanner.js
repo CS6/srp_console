@@ -32,15 +32,23 @@ state = {
 const data_Context = React.createContext(data);
 export { data_Context }
 
+export const ThemeContext = React.createContext('light');
+
+// export const ThemeContext = React.createContext(state.text);
+
+// export const {Provider, Consumer} = createContext(defaultData);
+
+
 export default class Scanner extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      url: 'http://facebook.github.io/react-native/',
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     url: " ",};
+  //     global.url = 'http://facebook.github.io/react-native/';
 
-    };
-  }
+  // }
+
 
 
   // onSuccess(e) {
@@ -74,7 +82,7 @@ export default class Scanner extends Component {
   onSuccess = async (e) => {
     // const data = e.data;
     data = e.data;
-    this.setState.text = e.data;
+    this.setState.text = '"'+e.data + '"';
     console.log('data', data);
     // Alert.alert('data', data);
     Alert.alert(
@@ -107,7 +115,14 @@ export default class Scanner extends Component {
             Go to <Text style={styles.textBold}>{state.text}</Text> on your computer and scan the QR code.
           </Text>
               </View> */}
-
+    
+    <Button
+          title="send url"
+          onPress={ ()=> {
+            url=data;
+            this.setState({cnt: counter})
+          }}
+        />
         <QRCodeScanner
           // onRead={this.onSuccess.bind(this)}
           // topContent={
