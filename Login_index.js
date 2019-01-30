@@ -15,7 +15,8 @@ import {
 
 } from 'react-native';
 import { createBottomTabNavigator, SafeAreaView, createStackNavigator,withNavigation } from 'react-navigation';
-
+import { Dropdown } from 'react-native-material-dropdown';
+import CheckBox from 'react-native-check-box'
 import Btn_Login from './app/page/Login/Btn_Login';
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
@@ -75,7 +76,14 @@ export default class Login_index extends Component {
       
     render() {
         const { user, confirmResult } = this.state;
-
+        let data = [{
+          value: 'Banana',
+        }, {
+          value: 'Mango',
+        }, {
+          value: 'Pear',
+        }];
+    
         return (
             // <SafeAreaView style={styles.container}>
 
@@ -83,8 +91,7 @@ export default class Login_index extends Component {
             <Image style={styles.background} source={{ uri: 'https://unsplash.it/800/600?image=102&blur' }} />
         <View style={styles.container}>
         <Btn_Login/>
-        
-
+       
           <Text style={[styles.title, { fontSize: 40}]}>Logo</Text>
         </View>
 
