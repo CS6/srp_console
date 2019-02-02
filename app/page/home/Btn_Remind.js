@@ -6,8 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 class Btn_Remind extends React.Component {
   render() {
     return (
-    
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('Setting')}
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('Setup')}
+
+    // <TouchableOpacity onPress={() => this.props.navigation.navigate('Setting')}
     style={styles.navRight}>
         <Icon name={"cog"}  style={styles.Icon}  />
 

@@ -26,6 +26,7 @@ import { createBottomTabNavigator, SafeAreaView,createSwitchNavigator, createSta
 // import Mian from './mian_vue';
 import Mian from './app/index';
 
+import Setup from './app/page/registered/Setup';
 
 import QRvue from './app/page/qrcode/QRvue';
 import Btn_Qrcode from './app/page/home/Btn_Qrcode';
@@ -188,6 +189,7 @@ const RootStack = createStackNavigator(
     Home:{ screen: HomeScreen } ,
     
     QRvue:{ screen: QRvue},
+    Setup:{screen:Setup},
 
     Details:{ screen: DetailsScreen},
     

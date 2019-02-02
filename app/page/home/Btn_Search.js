@@ -2,6 +2,7 @@ import React from 'react';
 import { Button,  NetInfo,  StyleSheet,TouchableOpacity,Image,Text ,View,Dimensions} from 'react-native';
 import { withNavigation } from 'react-navigation';
 const { width, height } = Dimensions.get('window');
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 class Btn_Search extends React.Component {
   constructor(props) {
@@ -43,17 +44,20 @@ componentDidMount() {
   <TouchableOpacity onPress={() => { this.componentDidMount()}}>
 
 <View style={styles.searchBox}>
-          <Image source={require('../../img/search.png')} style={styles.searchIcon} />
+{this.state.isConnected ? <Icon name={"link"}  style={styles.Icon} />: <Icon name={"unlink"}  style={styles.Icon} />}
+
           <Text style={styles.searchContent}> 生 態 組 </Text>
           <Text style={styles.welcome}>
                     {/* 当前网络连接类型： */}
                      {this.state.connectionInfo}
                 </Text>
           <Text style={styles.welcome}>
+
                     {/* 当前的网络状态： */}
-                    {this.state.isConnected ? '網路使用中': '沒有網路'}
+                    {this.state.isConnected ? '使用中': '沒有網路'}
                 </Text>
                
+                
                 
 
         </View>
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
   },
   searchContent: {
     color: '#666',
-    fontSize: 14,
+    fontSize: 24,
   },
   });
   

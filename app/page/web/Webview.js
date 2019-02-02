@@ -16,7 +16,11 @@ const { width, height } = Dimensions.get('window');
 
 
 export default class otherpage extends Component {
+    static navigationOptions = {
 
+        title: '我..是誰',
+    
+      };
     render() {
         return (
             <WebView

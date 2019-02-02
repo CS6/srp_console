@@ -32,7 +32,7 @@ _retrieveData = async () => {
     <View>
    
   <TouchableOpacity onPress={ this._retrieveData}>
-        <View style={styles.searchBox}>
+        <View style={styles.Button}>
           <Text style={styles.searchContent}>登入</Text>
         </View>
       </TouchableOpacity>
@@ -50,7 +50,7 @@ _retrieveData = async () => {
 
 
 const styles = StyleSheet.create({
-  searchBox: {
+  Button: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

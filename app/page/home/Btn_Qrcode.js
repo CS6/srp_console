@@ -12,7 +12,7 @@ class Btn_Qrcode extends React.Component {
     <Icon name={"qrcode"}  style={styles.Icon}  />
 
     {/* <Image source={require('../../img/scanning.png')} style={styles.navIcon} /> */}
-    <Text style={styles.navText}>扫一扫</Text>
+    <Text style={styles.navText}>簽到嘍</Text>
   </TouchableOpacity>
     
     );

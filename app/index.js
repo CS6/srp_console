@@ -22,6 +22,13 @@ import Webview from './page/web/Webview';
 import QRcode from './page/qrcode/QRvue';
 //bulletin  是 今日工事 與 公告 的進入點
 import Bulletin from './page/bulletin/Bulletin';
+//Calendar  是 請假審核 – 已審核 –  的進入點
+import Calendar from './page/calendar/Calendar';
+//Request  是 請假 的進入點
+import Request from './page/Request/Request';
+
+//Dispatch  是 派工 的進入點
+import Dispatch from './page/dispatch/Dispatch';
 
 // import Registered from './app/page/registered/Registered';
 
@@ -45,12 +52,16 @@ class index_Screen extends React.Component {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
         <Text  color='#6787A0' >Home!</Text>
+        <Icon name="code" size={30} color="#900" />
+
         <Icon name="battery-full" size={30} color="#6787A0" />
         <Icon name="battery-three-quarters" size={30} color="#900" />
         <Icon name="battery-half" size={30} color="#900" />
         <Icon name="battery-quarter" size={30} color="#900" />
         <Icon name="battery-empty" size={30} color="#900" />
         <Icon name="bed" size={30} color="#900" />
+
+        
         <Icon name="american-sign-language-interpreting" size={30} color="#777" />
 
       </View>
@@ -80,13 +91,18 @@ class index_Screen extends React.Component {
 
 export default createBottomTabNavigator({
   Bulletin:{screen:Bulletin},
+  Dispatch:{screen:Dispatch},
+  Request:{screen:Request},
+  Calendar:{screen:Calendar},
+  
 
-  info: { screen: Webview },
+   info: { screen: Webview },
 
-  index: { screen: index_Screen },
-  Other: { screen: Otherpage },
-  QRcode:{screen:QRcode},
-  otherHpage:{screen:otherHpage},
+  // index: { screen: index_Screen },
+  // Other: { screen: Otherpage },
+  // QRcode:{screen:QRcode},
+  // otherHpage:{screen:otherHpage},
+
   // Registered:{screen:Registered}
 
 
@@ -95,26 +111,32 @@ export default createBottomTabNavigator({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'QRcode') {
+        if (routeName === 'Dispatch') {
           iconName = "address-card";
-        } else if (routeName === 'info') {
-          iconName = "android";
-        }  else if (routeName === 'otherHpage') {
-          iconName = "assistive-listening-systems";
-
-        } else if (routeName === 'IOT') {
-          iconName = "expeditedssl";
-
-        } else if (routeName === 'Reply') {
+        } else if (routeName === 'Calendar') {
           iconName = "calendar-check";
 
-        } else if (routeName === 'Other') {
-          iconName = "expeditedssl";
-        } else if (routeName === 'index') {
-          iconName = "bell-slash";
         } else if (routeName === 'Bulletin') {
-          iconName = "bell-slash";
+          iconName = "home";
+        } else if (routeName === 'Request') {
+          iconName = "hiking";
+        }else if (routeName === 'info') {
+          iconName = "user-circle";
         }
+        // 
+        //calendar-minus
+
+
+
+        // else if (routeName === 'otherHpage') {
+        //   iconName = "assistive-listening-systems";
+        // }else if (routeName === 'IOT') {
+        //   iconName = "expeditedssl";
+        // } else if (routeName === 'Other') {
+        //   iconName = "expeditedssl";
+        // } else if (routeName === 'index') {
+        //   iconName = "home";
+        // } 
 
 
 
