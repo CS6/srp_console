@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput, TouchableOpacity,Button} from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 
 const instructions = Platform.select({
@@ -12,10 +12,83 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-  constructor(props) {
-    super(props);
+
+  constructor() {
+    super();
     this.state = {text: ''};
+
+
+    
+    this.state = {
+      標題們:null,
+      電話號碼:null,
+      名稱:null,
+      性別:null,
+      職稱:null,
+      常態組別:null,
+      是否全職:null,
+      備註:null,
+
+      Te:null,
+      PH:null,
+      NA:null,
+      SEX:null,
+      JOB:null,
+      NO:null,
+      NY:null,
+      PS:null,
+
+    
+      A:null,
+      B:null,
+      C:null,
+      D:null,
+      text:null,
+      value:null,
+      
+
+    }
+    this.termId = 100;
   }
+
+
+  JSON_Post = () => {
+    let url = 'https://asia-northeast1-test-cf2e8.cloudfunctions.net/postjson';
+    fetch(url, {
+      method: 'POST',
+      // headers 加入 json 格式
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // body 將 json 轉字串送出
+      // body: JSON.stringify({
+      //   email: 'lovef1232e@hexschool.com',
+      //   password: '12345678'
+      // })
+      body: JSON.stringify({
+
+        備註: this.text,
+        標題們:this.TE,
+        電話號碼:this.PH,
+        名稱:this.NA,
+        性別:this.SEX,
+        職稱:this.JOB,
+        常態組別:this.NO,
+        是否全職:this.NY,
+        備註:this.PS,
+ 
+      
+
+      })
+    }).then((response) => {
+        return response.json(); 
+      }).then((jsonData) => {
+        console.warn(jsonData);
+      }).catch((err) => {
+        console.warn('錯誤:', err);
+    })
+  }
+
   render() {
     let gender_data = [{
       value: '男',
@@ -40,29 +113,47 @@ export default class App extends Component<Props> {
         <TextInput
           style={styles.TextBox}
           placeholder="電話號碼"
-          onChangeText={(text) => this.setState({text})}
+          //onChangeText={(text) => this.setState({text})}
+          onChangeText={(text) => {this.PH=text;}}
+
         />
         <TextInput
           style={styles.TextBox}
           placeholder="名稱"
-          onChangeText={(text) => this.setState({text})}
-        />
+          // onChangeText={(text) => this.setState({text})}
+          onChangeText={(text) => {this.NA=text;}}/>
         <Dropdown
           label='性別'
           data={gender_data}
+          valueExtractor={({value})=> value}
+          value={this.value}
+          onChangeText={(value) => {
+            this.SEX=value;
+          }}
         />
         <TextInput
           style={styles.TextBox}
           placeholder="職稱"
-          onChangeText={(text) => this.setState({text})}
+         // onChangeText={(text) => this.setState({text})}
+         onChangeText={(text) => {this.JOB=text;}}
         />
         <Dropdown
           label='常態組別'
           data={group_data}
+          valueExtractor={({value})=> value}
+          value={this.value}
+          onChangeText={(value) => {
+            this.NO=value;
+          }}
         />
         <Dropdown
           label='是否全職'
           data={if_fulltime_data}
+          valueExtractor={({value})=> value}
+          value={this.value}
+          onChangeText={(value) => {
+            this.NY=value;
+          }}
         />
         <TouchableOpacity
           style={styles.button}
@@ -70,7 +161,30 @@ export default class App extends Component<Props> {
         >
         <Text> 註冊 </Text>
         </TouchableOpacity>
+        <Button
+          title="更新"
+          onPress={ ()=> {
+            // this.setState({album: data})
 
+            // console.warn(this.state.Te); // gives new value OK
+            // console.warn(this.state.PH); // gives new value OK
+            // console.warn(this.state.NA); // gives new value OK
+            // console.warn(this.state.SEX); // gives new value OK\
+            // console.warn(this.state.JOB); // gives new value OK
+            // console.warn(this.state.NO); // gives new value OK
+            // console.warn(this.state.NY); // gives new value OK
+            // console.warn(this.state.PS); // gives new value OK
+
+            this.JSON_Post()
+
+
+            // onPress={() => { this.onGet()}}
+
+
+
+
+          }}
+        />
       </View>
     );
   }

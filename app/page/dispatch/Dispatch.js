@@ -23,8 +23,6 @@ import { SafeAreaView, } from 'react-navigation';
 const { width, height } = Dimensions.get('window');
 
 
-
-
 const items = [
   {  
     name: "長老",
@@ -139,7 +137,6 @@ const items_work = [
 
 
 export default class Ｄispatch extends Component {
-
   static navigationOptions = {
 
     title: '派工系統',
@@ -153,12 +150,15 @@ export default class Ｄispatch extends Component {
   // }
   constructor() {
     super()
+
+
+    
     this.state = {
       items: null,
       loading: false,
       selectedItems: [],
       selectedItems2: [],
-      selectedItemObjects: [],
+      selectedItemObjects: [],/////被選取的人員清單
       currentItems: [],
       showDropDowns: false,
       single: false,
@@ -166,9 +166,19 @@ export default class Ｄispatch extends Component {
       highlightChildren: false,
       selectChildren: false,
       hasErrored: false,
+      A:null,
+      B:null,
+      C:null,
+      D:null,
+      text:null,
+      value:null,
+      
+
     }
     this.termId = 100;
   }
+
+ 
 
   componentDidMount() {
     const data =  fetch('https://facebook.github.io/react-native/movies.json', {
@@ -261,6 +271,8 @@ export default class Ｄispatch extends Component {
     this.setState({ selectedItems: filteredItems })
     console.log(selectedItems)
   }
+
+
   renderSelectText = () => {
     const { selectedItemObjects } = this.state;
 
@@ -274,9 +286,87 @@ export default class Ｄispatch extends Component {
       :
       'Select a fruit'
   }
-    state = {
-        text: 'http://facebook.github.io/react-native/',
-    };
+
+
+  onSelectedItemObjectsChange = (selectedItemObjects) => {
+    this.setState({ selectedItemObjects })
+    D=selectedItemObjects;
+    console.warn(selectedItemObjects)
+    console.warn(D)
+
+  }
+
+  onChangeValue = () => {
+    // Alert.alert(this.group_value);
+    // Alert.alert(this.value);
+
+  }
+
+
+  JSON_Post = () => {
+    let url = 'https://asia-northeast1-test-cf2e8.cloudfunctions.net/postjson';
+    fetch(url, {
+      method: 'POST',
+      // headers 加入 json 格式
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // body 將 json 轉字串送出
+      // body: JSON.stringify({
+      //   email: 'lovef1232e@hexschool.com',
+      //   password: '12345678'
+      // })
+      body: JSON.stringify({
+          組別: this.A,
+        工作類型: this.B,
+        時段: this.C,
+        備註: this.text,
+        人員: this.state.selectedItemObjects,
+
+
+      })
+    }).then((response) => {
+        return response.json(); 
+      }).then((jsonData) => {
+        console.warn(jsonData);
+      }).catch((err) => {
+        console.warn('錯誤:', err);
+    })
+  }
+
+  // A:null,
+  // B:null,
+  // C:null,
+  // D:null,
+  // text:null,
+  // value:null,
+  
+
+
+//   get() {
+//     fetch('http://ip.taobao.com/service/getIpInfo.php?ip=59.108.23.12', {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     }).then((response) => response.json())//1
+//         .then((jsonData) => {//2
+//             let country = jsonData.data.country;
+//             let city = jsonData.data.city;
+//             alert("country:" + country + "-------city:" + city);
+//         });
+// }
+
+ 
+    // state = {
+    //     // text: 'http://facebook.github.io/react-native/',
+    //     // value:null,
+    //     AA:null,
+    //     BB:null,
+    //     CC:null,
+    //     DD:null,
+
+    // };
     render() {
       let gender_data = [{
         value: '男',
@@ -299,9 +389,10 @@ export default class Ｄispatch extends Component {
       }, {
         value: '緊急事項',
       }];
+      let group_value = null;
 
       let group_data = [{
-        value: '房務組',
+        value: '房務組',name: 'ABC',
       }, {
         value: '餐廳組',
       }, {
@@ -357,27 +448,71 @@ export default class Ｄispatch extends Component {
          <Button
           title="更新"
           onPress={ ()=> {
-            
-            this.setState({album: data})
+            // this.setState({album: data})
+            console.warn(this.state.selectedItemObjects); // gives new value OK
+
+            console.warn(this.A); // gives new value OK
+            console.warn(this.B); // gives new value OK
+            console.warn(this.C); // gives new value OK\
+            console.warn(this.D); // gives new value OK
+            console.warn(this.text); // gives new value OK
+
+            this.JSON_Post()
+
+
+            // onPress={() => { this.onGet()}}
+
+
+
+
           }}
         />
     
         <Dropdown
+          // ref='picker'
           label='組別'
           data={group_data}
+          valueExtractor={({value})=> value}
+          value={this.value}
+          onChangeText={(value) => {
+            this.A=value;
+          //   setTimeout(() => {
+          //   console.warn(this.A+"A"); // gives new value OK
+          // }, 100);
+          }}
         />
         <Dropdown
           label='工作類型'
           data={works_data}
+          valueExtractor={({value})=> value}
+          value={this.value}
+          onChangeText={(value) => {
+            this.B=value;
+            
+          //   setTimeout(() => {
+          //   console.warn(value); // gives new value OK
+          // }, 100);
+          }}
         />
         <Dropdown
           label='時段'
           data={time_data}
-        />
+          valueExtractor={({value})=> value}
+          value={this.value}
+          onChangeText={(value) => {
+            this.C=value;
+            
+          //   setTimeout(() => {
+          //   console.warn(value); // gives new value OK
+          // }, 100);
+          }}        />
         <TextInput
           style={styles.TextBox}
           placeholder="備註"
-          onChangeText={(text) => this.setState({text})}
+          // onChangeText={(text) => this.setState({text})}
+
+          onChangeText={(text) => {this.text=text;}}
+
         />
        
 
@@ -425,13 +560,14 @@ export default class Ｄispatch extends Component {
          onCancel={this.onCancel}
 
         
+          // items={items} 
           items={items} 
           uniqueKey='id'
           subKey='children'
           selectText='選擇派遣人員'
           showDropDowns={true}
           readOnlyHeadings={true}
-          
+          onSelectedItemObjectsChange={this.onSelectedItemObjectsChange}
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={this.state.selectedItems}
         />

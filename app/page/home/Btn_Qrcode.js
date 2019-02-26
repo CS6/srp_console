@@ -26,11 +26,9 @@ class Btn_Qrcode extends React.Component {
 const styles = StyleSheet.create({
     navLeft: {
         alignItems: 'center',
-        marginLeft: 10,
-      },
-      navRight: {
-        alignItems: 'center',
-        marginRight: 10,
+        // marginLeft: 10,
+        paddingLeft: 15,
+        // backgroundColor: 'white',
       },
       navIcon: {
         height: 20,
@@ -38,7 +36,8 @@ const styles = StyleSheet.create({
       },
       Icon: {
         fontSize: 24,
-        color:"#333"
+        color:"#333",
+        
       },
       navText: {
         fontSize: 10,

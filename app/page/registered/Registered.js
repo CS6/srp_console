@@ -47,10 +47,86 @@ const items_Text = [
 ]
 
 export default class Registered extends Component {
+  constructor() {
+    super()
 
+
+    
+    this.state = {
+      標題們:null,
+      電話號碼:null,
+      名稱:null,
+      性別:null,
+      職稱:null,
+      常態組別:null,
+      是否全職:null,
+      備註:null,
+
+      Te:null,
+      PH:null,
+      NA:null,
+      SEX:null,
+      JOB:null,
+      NO:null,
+      NY:null,
+      PS:null,
+
+    
+      A:null,
+      B:null,
+      C:null,
+      D:null,
+      text:null,
+      value:null,
+      
+
+    }
+    this.termId = 100;
+  }
+
+ 
     state = {
         text: 'http://facebook.github.io/react-native/',
     };
+
+
+    JSON_Post = () => {
+      let url = 'https://asia-northeast1-test-cf2e8.cloudfunctions.net/postjson';
+      fetch(url, {
+        method: 'POST',
+        // headers 加入 json 格式
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // body 將 json 轉字串送出
+        // body: JSON.stringify({
+        //   email: 'lovef1232e@hexschool.com',
+        //   password: '12345678'
+        // })
+        body: JSON.stringify({
+  
+          備註: this.text,
+          標題們:this.TE,
+          電話號碼:this.PH,
+          名稱:this.NA,
+          性別:this.SEX,
+          職稱:this.JOB,
+          常態組別:this.NO,
+          是否全職:this.NY,
+          備註:this.PS,
+   
+        
+  
+        })
+      }).then((response) => {
+          return response.json(); 
+        }).then((jsonData) => {
+          console.warn(jsonData);
+        }).catch((err) => {
+          console.warn('錯誤:', err);
+      })
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>

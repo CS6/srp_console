@@ -25,13 +25,16 @@ class Btn_Remind extends React.Component {
 
 
 const styles = StyleSheet.create({
-    navLeft: {
-        alignItems: 'center',
-        marginLeft: 10,
-      },
+    // navLeft: {
+    //     alignItems: 'center',
+    //     marginLeft: 10,
+    //   },
       navRight: {
         alignItems: 'center',
-        marginRight: 10,
+        // marginRight: 10,
+        
+        paddingRight: 15,
+        // backgroundColor: 'white',
       },
       navIcon: {
         height: 20,

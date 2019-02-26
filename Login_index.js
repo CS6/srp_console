@@ -18,6 +18,8 @@ import { createBottomTabNavigator, SafeAreaView, createStackNavigator,withNaviga
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box'
 import Btn_Login from './app/page/Login/Btn_Login';
+import Login from './app/page/Login/Login';
+
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 
@@ -46,13 +48,19 @@ export default class Login_index extends Component {
         // },
         headerStyle: {
             // paddingHorizontal: 8,
+            backgroundColor:'#7094B1',
+
+            // headerTitleStyle
+            fontWeight: 'bold',
+
         },
+            headerTintColor:'#fff',
             
         headerTitleStyle:{flex:1, textAlign: 'center'},
 
             
             
-        title: 'AppState',
+        title: '嘎嘎嗚拉拉',
         headerBackTitleVisible:false,
          headerBackTitle: null,
          headerTruncatedBackTitle: null,
@@ -88,19 +96,40 @@ export default class Login_index extends Component {
             // <SafeAreaView style={styles.container}>
 
             <View style={styles.container}>
-            <Image style={styles.background} source={{ uri: 'https://unsplash.it/800/600?image=102&blur' }} />
+            <Image style={styles.background} source={{ uri: 'https://unsplash.it/800/600?random&blur' }} />
+
+            {/* <Image style={styles.background} source={{ uri: 'https://unsplash.it/800/600?image=102&blur' }} /> */}
         <View style={styles.container}>
-        <Btn_Login/>
-       
-          <Text style={[styles.title, { fontSize: 40}]}>Logo</Text>
+        {/* <Btn_Login/> */}
+
+        
+        <Text style={[styles.title, { fontSize: 90}]}>司馬庫斯</Text>
+        <Text style={[styles.title, { fontSize: 40}]}>  Ａ  </Text>
+        <Text style={[styles.title, { fontSize: 40}]}>資訊管理系統</Text>
+        <Text style={[styles.title, { fontSize: 30}]}>  底加辣  </Text>
+
+
+          {/* <Text style={[styles.title, { fontSize: 40}]}>Logo</Text> */}
         </View>
 
 
+        <Login onPress={ ()=> {
+            pressStatus = 'pressin' 
+            this.setState({ pressStatus: 'pressin' });
+
+          }}/>
+
+{/* 
+        <View style={styles.bottmContainer}>
+        <Login/>
+    
+     
+
+        </View> */}
 
 
 
         <View style={styles.bottmContainer}>
-
         <Btn_Login/>
 
         </View>
@@ -146,7 +175,7 @@ const styles = StyleSheet.create({
 
   },
   background: {
-    height: 800,
+    height: 900,
     width: 600,
     position: 'absolute',
     
