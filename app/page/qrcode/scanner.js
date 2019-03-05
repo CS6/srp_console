@@ -76,6 +76,11 @@ export default class Scanner extends Component {
     }
     );
   }
+  //==========================
+  // ToDO 
+  // 加上ＱＲcode 解析
+  // 向APi請求簽到
+  //==========================
 
   onSuccess = async (e) => {
     // const data = e.data;
@@ -92,8 +97,10 @@ export default class Scanner extends Component {
           url=data;
           this.setState({url: url})
         }},
-        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: '我還不想簽到', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
         { text: 'OK', onPress: () => this.GC_data() },
+        { text: '簽到去～', onPress: () => this.GC_data() },
+
 
       ],
       { cancelable: false }

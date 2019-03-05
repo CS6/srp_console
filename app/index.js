@@ -19,6 +19,9 @@ import otherHpage from './page/home/otherHpage';
 
 import Webview from './page/web/Webview';
 
+import User from './page/user/user';
+
+
 import QRcode from './page/qrcode/QRvue';
 //bulletin  是 今日工事 與 公告 的進入點
 import Bulletin from './page/bulletin/Bulletin';
@@ -96,7 +99,7 @@ export default createBottomTabNavigator({
   Calendar:{screen:Calendar},
   
 
-   info: { screen: Webview },
+   info: { screen: User },
 
   // index: { screen: index_Screen },
   // Other: { screen: Otherpage },

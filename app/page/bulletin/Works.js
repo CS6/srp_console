@@ -56,29 +56,122 @@ const items_Text = [
  },
 ]
 
+
+class Card_Top extends React.Component {
+
+
+  // 滑动tab
+  renderScrollableTab() {
+    return (
+      <View style={{ flex: 1,padding:15,     }}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: "space-around"}}>
+        <Text style={{ fontSize:42,color:'#FFFFFF', paddingRight:15 }}>{"生態組"}</Text>
+        <Text style={{ fontSize:22,color:'#FFFFFF',paddingLeft:15,paddingVertical:10}}>{"巨木步道開路"}</Text>
+        </View>
+        <View style={{ flex: 1, flexDirection:'row',justifyContent:"flex-start"}}>
+        <Text style={{ fontSize:22,color:'#FFFFFF',paddingLeft:15,paddingVertical:10  }}>{"共事人員"}</Text>
+        </View>
+        <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize:14,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{"A"}</Text>
+        </View>
+      </View>
+////待實作for迴圈自動填入
+    )
+  }
+
+  render() {
+    return (
+          <View style={styles.card_Top}>
+            {this.renderScrollableTab()}
+          </View>
+    );
+  }
+}
+class Card_Body extends React.Component {
+
+
+  // 滑动tab
+  renderScrollableTab() {
+    return (
+      <View style={{ flex: 1,padding:15,     }}>
+        <View style={{ flex: 1, flexDirection:'column',justifyContent: 'center'}}>
+        <Text style={{ fontSize:22,color:'#4A667C'  }}>{"特別備註"}</Text>
+                  {/* <Icon>{items_Text[0].children[0].name }</Icon> */}
+        </View>
+        <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+
+        <Text style={{ fontSize:24,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{"正常出勤、暑假我來了"}</Text>
+        </View>
+      </View>
+////待實作for迴圈自動填入
+    )
+  }
+
+  render() {
+    return (
+          <View style={styles.card_Body}>
+            {this.renderScrollableTab()}
+          </View>
+    );
+  }
+}
+
+
+class Card_Button extends React.Component {
+
+
+  // 滑动tab
+  renderScrollableTab() {
+    return (
+      <View style={{ flex: 1,padding:15,     }}>
+        <View style={{ flex: 1, flexDirection:'column',justifyContent: 'center'}}>
+        <Text style={{ fontSize:22,color:'#4A667C' }}>{"本月出勤狀況"}</Text>
+                  {/* <Icon>{items_Text[0].children[0].name }</Icon> */}
+        </View>
+        <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize:20,color:'#8D8D8D' }}>{"正常出勤：18天："}</Text>
+        <Text style={{ fontSize:20,color:'#8D8D8D' }}>{"請假：18天"}</Text>
+        <Text style={{ fontSize:20,color:'#8D8D8D' }}>{"缺曠：18天"}</Text>
+
+        </View>
+      </View>
+////待實作for迴圈自動填入
+    )
+  }
+
+  render() {
+    return (
+          <View style={styles.card_Button}>
+            {this.renderScrollableTab()}
+          </View>
+    );
+  }
+}
+
 export default class Works extends Component {
 
 
       render() {
         return (
           <SafeAreaView style={styles.container}>
-    
+              <ScrollView style={styles.Scrollcontainer}>
+
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
-
-<Text  color='#6787A0' >Home!</Text>
-
+    <Card_Top/>
+    <Card_Body/>
+<Card_Button/>
+{/* <Text   >Home!</Text>
 <Icon name="battery-full" size={30} color="#6787A0" />
 <Icon name="battery-three-quarters" size={30} color="#900" />
 <Icon name="battery-half" size={30} color="#900" />
 <Icon name="battery-quarter" size={30} color="#900" />
 <Icon name="battery-empty" size={30} color="#900" />
 <Icon name="bed" size={30} color="#900" />
-<Icon name="american-sign-language-interpreting" size={30} color="#777" />
+<Icon name="american-sign-language-interpreting" size={30} color="#777" /> */}
 
 </View>
 
-
+</ScrollView>
           </SafeAreaView>
     
            
@@ -92,6 +185,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
 
 
   },
@@ -119,13 +213,13 @@ const styles = StyleSheet.create({
   buttonTouchable: {
     padding: 16,
   },
-  card: {
+  card_Top: {
     flexDirection:'column',
     alignItems: 'center',
     justifyContent: 'center',
     width: width * 0.9,
-    height:width * 0.6,
-    backgroundColor: '#ededed',
+    height:width * 0.55,
+    backgroundColor: '#7094B1',
     borderRadius: 10,
     marginVertical: 10,
     shadowColor: '#000000',
@@ -135,7 +229,44 @@ const styles = StyleSheet.create({
   shadowOffset: {
     width: 0,
     height: 4
+    },
+  marginHorizontal:10,
+  }, card_Body: {
+    flexDirection:'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: width * 0.9,
+    height:width * 0.3,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    marginVertical: 10,
+    shadowColor: '#000000',
+  shadowRadius: 8,
+  shadowOpacity: 0.4,
+  elevation: 8,
+  shadowOffset: {
+    width: 0,
+    height: 4
+    },
+  marginHorizontal:10,
   },
+  card_Button: {
+    flexDirection:'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: width * 0.9,
+    height:width * 0.45,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    marginVertical: 10,
+    shadowColor: '#000000',
+  shadowRadius: 8,
+  shadowOpacity: 0.4,
+  elevation: 8,
+  shadowOffset: {
+    width: 0,
+    height: 4
+    },
   marginHorizontal:10,
   },
   ButtonCard: {

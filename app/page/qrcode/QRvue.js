@@ -123,7 +123,7 @@ export default class qrcode extends Component {
           
    
           <SafeAreaView style={styles.container}>
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 ,    backgroundColor: 'white'}}>
             {this.renderScrollableTab()}
           </View>
           
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
   },
   tabBarUnderline: {
     backgroundColor: '#2562b4',

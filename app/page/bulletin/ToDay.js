@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
 
+    backgroundColor: '#FFFFFF',
 
   },
   Scrollcontainer:{
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: width * 0.9,
     height:width * 0.6,
-    backgroundColor: '#ededed',
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
     marginVertical: 10,
     shadowColor: '#000000',

@@ -70,7 +70,8 @@ class URL extends Component {
     //-----------------------------------------------------
     //
     return (
-      <View style={{flex:1}} >
+      <View style={{flex:1,backgroundColor: 'white',
+    }} >
         <Text style={styles.text}>{this.state.url}</Text>
         <Button
           title= {"顯示網址:"+this.state.url}
@@ -88,19 +89,97 @@ class URL extends Component {
     );
   }
 }
-export default class qrcode extends Component {
 
+class Blink extends Component{
+  // 构造
+    constructor(props) {
+      super(props);
+      // 初始状态
+      this.state = {showText:true};
+        setInterval(()=>{
+            this.setState({showText:!this.state.showText})//每个一秒，showText的值取反。原来的值是这样子获取this.state.showText
+        },1000);
+    }
+    
+  render(){
+      let display = this.state.showText ? this.props.text : ' ';//三目运算，如果是true，显示四个组件的值，否则，显示空白
+      var timeInMs = Date.now();
+      var timeInDay=new Date();
+      day=timeInDay.toUTCString();
+      var code = btoa(time.toDateString());
+      
+      
+      return(
+        <View>
+          {/* <Text>{display}</Text> */}
+          <Text>{day}</Text>
+         <Text>{timeInMs}</Text>
+         <Text>{code}</Text>
+
+         <QRCode
+              // value={this.state.text}
+              value={day}
+              size={200}
+              bgColor='black'
+              fgColor='white'/>
+        </View>
+         
+
+      )
+  }
+}
+class BlinkQRcode extends Component{
+  render(){
+     
+   
+      return(
+          <View>
+            <Blink/>
+              {/* <Blink text='I love to blink' />
+              <Blink text='Yes blinking is so great' />
+            
+              <Blink text='Why did they ever take this out of HTML' />
+              <Blink text='Look at me look at me look at me' /> */}
+          </View>
+      )
+  }
+}
+export default class qrcode extends Component {
+      /*---------------------------------------------------
+      每 15 秒刷新一次 state.timeLog
+      拔掉測試介面
+       // btoa(time.toDateString())
+        "VHVlIE1hciAwNSAyMDE5"
+        atob("VHVlIE1hciAwNSAyMDE5");
+        "Tue Mar 05 2019"
+        var Buffer = require('buffer').Buffer;
+        new Buffer('Hello, world').toString('base64'); // "SGVsbG8sIHdvcmxk"
+        new Buffer('SGVsbG8sIHdvcmxk', 'base64').toString(); // "Hello, world"
+        new Buffer('中文').toString('base64'); // "5Lit5paH"
+        new Buffer('5Lit5paH', 'base64').toString(); // "中文"
+        
+        
+
+        
+      */
     state = {
         text: 'http://facebook.github.io/react-native/',
+        timeLog:"2018/13/14",
       };
+
     
       render() {
+        
+        var timeInMs = Date.now();
+        var timeInDay=new Date();
+        
+      
         return (
           <SafeAreaView style={styles.container}>
-    
+    <BlinkQRcode/>
             {/* <Image style={styles.background}  source={require('../../img/bkimg/1x/G1.png')} /> */}
           <View style={styles.container}>
-<RN1></RN1>
+{/* <RN1></RN1>
 <URL></URL>
 <Button
           title="計數"
@@ -109,19 +188,23 @@ export default class qrcode extends Component {
             this.setState({cnt: counter})
           }}
         />
-<Text>sdsds</Text>
+<Text>sdsds</Text> */}
             <TextInput
             placeholder="input"
               style={styles.input}
               onChangeText={(text) => this.setState({text: text})}
               value={this.state.text}
             />
-            {/* <QRCode
-              value={this.state.text}
+          
+            <Text>{timeInDay+timeInMs}</Text>
+            <QRCode
+              // value={this.state.text}
+              value={this.state.timeLog}
+
               size={200}
               bgColor='black'
               fgColor='white'/>
-               <Button
+               {/* <Button
             title="Go to Home"
             onPress={() => this.props.navigation.navigate('Home')}/> */}
   </View>
