@@ -29,18 +29,12 @@ const items_Text = [
       profile_icon: require('../../img/account.png'),
       profile_name: "拉互依",
       leave_type: "假別",
+      leave_start_date: "2019/10/10",
+      leave_end_date: "2019/10/11",
+      leave_start_time: "12:00",
+      leave_end_time: "13:00",
       // id: 20,
-    }, {
-      profile_icon: require('../../img/account.png'),
-      profile_name: "拉互依",
-      leave_type: "假別",
-      // id: 20,
-    }, {
-      profile_icon: require('../../img/account.png'),
-      profile_name: "拉互依",
-      leave_type: "假別",
-      // id: 20,
-    },]
+    }]
   },
 ]
 
@@ -60,10 +54,24 @@ class Card extends React.Component {
           <Image style={styles.profileImg} source={items_Text[0].children[0].profile_icon} />
         </View>
         <View style={styles.cardItemText}>
-          <Text style={styles.profileText}>{items_Text[0].children[0].profile_name}</Text>
-          <Text style={styles.profileText}>{items_Text[0].children[0].leave_type}</Text>
+          <View>
+            <Text style={styles.profileName}>{items_Text[0].children[0].profile_name}</Text>
+            <Text></Text>
+            <Text style={styles.leaveType}>{items_Text[0].children[0].leave_type}</Text>
+          </View>
+          <View style={styles.cardItemDate}>
+            <Text style={styles.cardItemLeaveDate}>{items_Text[0].children[0].leave_start_date}</Text>
+            <Text>       ｜</Text>
+            <Text style={styles.cardItemLeaveDate}>{items_Text[0].children[0].leave_end_date}</Text>
+          </View>
+          <View style={styles.cardItemDate}>
+            <Text style={styles.cardItemLeaveDate}>{items_Text[0].children[0].leave_start_time}</Text>
+            <Text>   ｜</Text>
+            <Text style={styles.cardItemLeaveDate}>{items_Text[0].children[0].leave_end_time}</Text>
+          </View>
+          
         </View>
-        <View style={styles.cardItemCheckBox}>
+        {/* <View style={styles.cardItemCheckBox}>
           <CheckBox
             style={{ flex: 1, padding: 10 }}
             onClick={() => {
@@ -74,7 +82,7 @@ class Card extends React.Component {
             isChecked={this.state.isChecked}
             // leftText={"CheckBox"}
           />
-        </View>
+        </View> */}
 
       </View>
       ////待實作for迴圈自動填入
@@ -126,8 +134,8 @@ export default class VerifyLeave extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     // backgroundColor: '#6787A0',
     // padding: 20
   },
@@ -135,11 +143,18 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
-  profileText: {
-    fontSize: 20,
+  profileName: {
+    fontSize: 14,
+  },
+  leaveType:{
+    fontSize: 16,
+  },
+  cardItemLeaveDate:{
+    fontSize: 14,
   },
   profileImg: { 
-
+    width: 30,
+    height: 30
   },
   cardContent:{
     flex: 1, 
@@ -152,7 +167,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   cardItemText:{
-    flex: 3, 
+    flex: 4, 
     flexDirection: 'row', 
     alignItems: 'center', 
     justifyContent: 'space-evenly'

@@ -16,7 +16,7 @@ import ScrollableTabView, { ScrollableTabBar, DefaultTabBar } from 'react-native
 
 import { SafeAreaView, } from 'react-navigation';
 import Reply from './Reply';
-import Request from './Request';
+import Request from './RequesLeave';
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 
@@ -50,7 +50,7 @@ export default class Calendar extends Component {
     super(props);
     this.state = {
       tabShow: false,
-      label: [ '請假審核', '已審核'],
+      label: [ '未審核', '已審核'],
     };
   }
 
@@ -88,7 +88,7 @@ export default class Calendar extends Component {
               switch (item) {
                 
                 
-                case '請假審核':
+                case '未審核':
                   return (
                     <Request tabLabel={item} key={index} />
                   )
