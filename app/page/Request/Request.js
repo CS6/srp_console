@@ -17,6 +17,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { TextField } from 'react-native-material-textfield';
 import CalendarPicker from 'react-native-calendar-picker';
 import { SafeAreaView, } from 'react-navigation';
+import CheckBox from 'react-native-check-box';
 import moment from "moment";
 ///此為請假頁面
 // 取得屏幕的宽高Dimensions
@@ -101,13 +102,14 @@ class ApplyLeaveForm extends React.Component {
     this.setState({endModalVisible: visible});
   }
 
-  _numberOfDay(selectedEndDate, selectedStartDate, selectedLeaveType){
+  _numberOfDay(selectedEndDate, selectedStartDate, selectedLeaveType, isChecked){
     if(selectedLeaveType == null) alert("請選擇假別");
     else if(selectedStartDate == null) alert("請選擇起始日期");
     else if(selectedEndDate == null) alert("請選擇終止日期");
     else if(selectedEndDate < selectedStartDate) alert("終止日期不能比起始日期早");
     else {
-      const numberOfDay = ((selectedEndDate-selectedStartDate)/1000/3600/24)+1;
+      let numberOfDay = ((selectedEndDate-selectedStartDate)/1000/3600/24)+1;
+      if(isChecked == true) numberOfDay -= 0.5;
       alert ("共請"+numberOfDay+"天假");
     }
   }
@@ -136,9 +138,7 @@ class ApplyLeaveForm extends React.Component {
     const selectedStartDate  = this.state.selectedStartDate;
     const selectedEndDate  = this.state.selectedEndDate;
     const selectedLeaveType  = this.state.selectedLeaveType;
-    
-    // const startDate = selectedStartDate ? selectedStartDate.toString() : '';
-    // const endDate = selectedEndDate ? selectedEndDate.toString() : '';
+    let isChecked = this.state.isChecked;
     const startDate = selectedStartDate ? moment(selectedStartDate).format("YYYY/MM/DD") : '';
     const endDate = selectedEndDate ? moment(selectedEndDate).format("YYYY/MM/DD") : '';
     return (
@@ -167,6 +167,19 @@ class ApplyLeaveForm extends React.Component {
               <Text style={styles.dateClickText} >終止日期: <Text style={styles.dateSelectedText}>{endDate}</Text></Text>
             </TouchableOpacity>
 
+            <CheckBox
+              style={{ flex: 1, marginTop:20}}
+              onClick={() => {
+                this.setState({
+                  isChecked: !isChecked
+                })
+              }}
+              isChecked={isChecked}
+              rightText={"有一天為半天假"}
+              rightTextStyle={{color:'#808080',fontSize: 15,}}
+              checkBoxColor='#808080'
+            />
+
             <TextInput
               style={styles.leaveModalTextbox}
               placeholder="請假理由"
@@ -177,7 +190,7 @@ class ApplyLeaveForm extends React.Component {
           <View style={styles.leaveSubmit}>
             <TouchableOpacity title='送出假單' 
               style={styles.leaveSubmitBtn} 
-              onPress={() => {this._numberOfDay(selectedEndDate,selectedStartDate,selectedLeaveType)}}>
+              onPress={() => {this._numberOfDay(selectedEndDate,selectedStartDate,selectedLeaveType,isChecked)}}>
               <Text style={styles.leaveSubmitText} >送出假單</Text>
             </TouchableOpacity>
           </View>
@@ -324,7 +337,7 @@ const styles = StyleSheet.create({
     // marginTop: 100,
   },
   dateClick:{
-    marginVertical: 20,
+    marginVertical: 10,
     borderBottomWidth: 0.4,
     borderBottomColor: '#8D8D8D'
   },

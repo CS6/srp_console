@@ -9,7 +9,7 @@
   "dependencies": {
     "moment": "^2.24.0",
     "react": "16.6.3",
-    "react-native": "0.58.1",
+    "react-native": "^0.58.6",
     "react-native-calendar-picker": "^5.22.0",
     "react-native-camera": "^1.6.4",
     "react-native-check-box": "^2.1.7",
