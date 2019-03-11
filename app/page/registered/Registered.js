@@ -91,7 +91,7 @@ export default class Registered extends Component {
 
 
     JSON_Post = () => {
-      let url = 'https://asia-northeast1-test-cf2e8.cloudfunctions.net/postjson';
+      let url = 'https://us-central1-bt-fucking-good.cloudfunctions.net/echo';
       fetch(url, {
         method: 'POST',
         // headers 加入 json 格式
