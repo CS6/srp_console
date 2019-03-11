@@ -106,8 +106,8 @@ class Blink extends Component{
       var timeInMs = Date.now();
       var timeInDay=new Date();
       day=timeInDay.toUTCString();
-      var code = btoa(time.toDateString());
-      
+     var code = timeInDay.toDateString();
+   
       
       return(
         <View>
@@ -176,9 +176,7 @@ export default class qrcode extends Component {
       
         return (
           <SafeAreaView style={styles.container}>
-    <BlinkQRcode/>
-            {/* <Image style={styles.background}  source={require('../../img/bkimg/1x/G1.png')} /> */}
-          <View style={styles.container}>
+
 {/* <RN1></RN1>
 <URL></URL>
 <Button
@@ -188,7 +186,15 @@ export default class qrcode extends Component {
             this.setState({cnt: counter})
           }}
         />
-<Text>sdsds</Text> */}
+<Text>sdsds</Text> 
+ */}
+
+    <BlinkQRcode/>
+            {/* <Image style={styles.background}  source={require('../../img/bkimg/1x/G1.png')} /> */}
+          <View style={styles.container}>
+
+            {/*
+            /// TextInput改變qrcode 
             <TextInput
             placeholder="input"
               style={styles.input}
@@ -203,7 +209,7 @@ export default class qrcode extends Component {
 
               size={200}
               bgColor='black'
-              fgColor='white'/>
+              fgColor='white'/> */}
                {/* <Button
             title="Go to Home"
             onPress={() => this.props.navigation.navigate('Home')}/> */}
