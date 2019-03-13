@@ -21,6 +21,7 @@ import CardLeave from '../../components/CardLeave';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get("window");
+const url = 'https://us-central1-my-fuck-awesome-project.cloudfunctions.net/getLeaveNoteList';
 
 const items_Text = [
   {
@@ -46,37 +47,76 @@ const items_Text = [
 export default class RequestLeave extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      issuer: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+      isLoading: true,
+    };
   }
-  _getAll() {}
-  onSuccess(e) {
-    Linking.openURL(e.data).catch(err =>
-      console.error("An error occured", err)
-    );
+
+  componentDidMount() {
+    this.onPost();
   }
-  async componentDidMount() {
-    // TODO: You: Do firebase things
-    // const { user } = await firebase.auth().signInAnonymously();
-    // console.warn('User -> ', user.toJSON());
-    // await firebase.analytics().logEvent('foo', { bar: '123'});
+
+  onPost = () =>{
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({
+        "uid": this.state.issuer,
+        "unAuthNotes":true,
+        "authedNotes":true,
+        "offset":0,
+        "limit":5
+      })
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      if (data.excutionResult == "success") {
+        console.warn(data.leaveNote)
+        this.setState({
+          isLoading: false,
+          leaveNote: data.leaveNote,
+        }, function(){
+
+        });
+      }
+    }).catch((err) => {
+      console.warn('錯誤:', err);
+    });
   }
+
   render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.Scrollcontainer}>
-        <CardLeave
+    if(this.state.isLoading){
+      return(
+        <View></View>
+      )
+    }
+    else{
+      return (
+        <SafeAreaView style={styles.container}>
+          <ScrollView style={styles.Scrollcontainer}>
+  
+          {this.state.leaveNote.map((note) => {
+           return (
+            <CardLeave
             profile_icon={items_Text[0].children[0].profile_icon}
-            profile_name={items_Text[0].children[0].profile_name}
-            leave_type={items_Text[0].children[0].leave_type}
+            profile_name={note.issuerName.toString}
+            leave_type={note.type}
             leave_start_date={items_Text[0].children[0].leave_start_date}
             leave_end_date={items_Text[0].children[0].leave_end_date}
             leave_start_time={items_Text[0].children[0].leave_start_time}
             leave_end_time={items_Text[0].children[0].leave_end_time}
-            leave_desc={items_Text[0].children[0].leave_desc}
+            leave_desc={note.desc}
             leave_apply_date={items_Text[0].children[0].leave_apply_date} />
-        </ScrollView>
-      </SafeAreaView>
-    );
+           );
+        })}
+          </ScrollView>
+        </SafeAreaView>
+      );
+    }
+
   }
 }
 

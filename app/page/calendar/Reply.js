@@ -45,16 +45,6 @@ export default class Reply extends Component {
     super();
     this.state = {};
   }
-  _getAll() { }
-  onSuccess(e) {
-    Linking.openURL(e.data).catch(err => console.error('An error occured', err));
-  }
-  async componentDidMount() {
-    // TODO: You: Do firebase things
-    // const { user } = await firebase.auth().signInAnonymously();
-    // console.warn('User -> ', user.toJSON());
-    // await firebase.analytics().logEvent('foo', { bar: '123'});
-  }
   render() {
     return (
       <SafeAreaView style={styles.container}>

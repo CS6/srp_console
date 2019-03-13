@@ -122,9 +122,17 @@ class ApplyLeaveForm extends React.Component {
         "endLeaveTime": Number(selectedEndDate),
         "desc": leaveReason,
       })
-    }).then((response) => response.json())
-      .then((data) =>  console.warn(data))
-      .catch((err)=>console.warn(err));
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      console.warn(data)
+      if(data.excutionResult == "success") {
+        Alert.alert ("請假成功");
+      }
+    }).catch((err)=> {
+      console.warn('錯誤:',err)
+      Alert.alert ("假單發送失敗","請檢查網路");
+    });
   }
 
   _numberOfDay(selectedEndDate, selectedStartDate, selectedLeaveType, leaveReason, isCheckedFirstHalf, isCheckedSecondHalf){
@@ -143,7 +151,6 @@ class ApplyLeaveForm extends React.Component {
       else selectedEndDate += millisecondsFor11h59min;
 
       this.onPost(selectedStartDate,selectedEndDate,selectedLeaveType,leaveReason);
-      Alert.alert ("請假成功");
     }
   }
 
@@ -152,22 +159,6 @@ class ApplyLeaveForm extends React.Component {
       selectedLeaveType: value,
     });
   }
-
-  
-  // onGet() {
-  //   fetch('https://us-central1-my-fuck-awesome-project.cloudfunctions.net/getAnnouncement', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }).then((response) => response.json())
-  //     .then((jsonData) => {
-  //       let announcement = jsonData.announcement;
-  //       alert("announcement:" + announcement.time._seconds);
-  //     });
-  // }
-
-
 
   renderApplyLeaveForm() {
     const selectedStartDate  = this.state.selectedStartDate;
@@ -244,13 +235,6 @@ class ApplyLeaveForm extends React.Component {
               <Text style={styles.leaveSubmitText} >送出假單</Text>
             </TouchableOpacity>
           </View>
-          
-
-          {/* <Button
-            onPress={() => { this.onGet() }}
-            title="press"
-          /> */}
-
         </View>
         <Modal 
           animationType="fade"
@@ -309,12 +293,6 @@ export default class Request extends Component {
     title: '我要請假',
 
   };
-  // constructor(){
-  //   super()
-  //   this.state = {
-  //     selectedItems: [],
-  //   }
-  // }
 
   render() {
     return (
@@ -322,10 +300,6 @@ export default class Request extends Component {
         <ScrollView style={styles.Scrollcontainer}>
           <ApplyLeaveForm />
         </ScrollView>
-
-        {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <View style={styles.container}></View>
-        </View> */}
       </SafeAreaView>
     );
   };
