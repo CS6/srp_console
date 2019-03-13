@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Platform,
   StyleSheet,
@@ -11,43 +11,48 @@ import {
   ScrollView,
   TextInput,
   Button,
-  SafeAreaView
-} from 'react-native';
+  SafeAreaView,
+  TouchableHighlight,
+  Modal
+} from "react-native";
 
-import CardLeaveList from '../../components/CardLeaveList';
-// import CheckBox from 'react-native-check-box';
+import CardLeave from '../../components/CardLeave';
 // import { SafeAreaView, } from 'react-navigation';
 
 // 取得屏幕的宽高Dimensions
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 const items_Text = [
   {
     name: "標題們",
     // id: 0,
-    children: [{
-      profile_icon: require('../../img/account.png'),
-      profile_name: "拉互依",
-      leave_type: "假別",
-      leave_start_date: "2019/10/10",
-      leave_end_date: "2019/10/11",
-      leave_start_time: "12:00",
-      leave_end_time: "13:00",
-      leave_desc: "請假理由請假理由請假理由請假理由請假理由",
-      leave_apply_date: "2019/10/11"
-      // id: 20,
-    }]
-  },
-]
+    children: [
+      {
+        profile_icon: require("../../img/account.png"),
+        profile_name: "拉互依",
+        leave_type: "假別",
+        leave_start_date: "2019/10/10",
+        leave_end_date: "2019/10/11",
+        leave_start_time: "12:00",
+        leave_end_time: "13:00",
+        leave_desc: "請假理由請假理由請假理由請假理由請假理由",
+        leave_apply_date: "2019/10/11"
+        // id: 20,
+      }
+    ]
+  }
+];
 
-export default class Reply extends Component {
+export default class RequestLeave extends Component {
   constructor() {
     super();
     this.state = {};
   }
-  _getAll() { }
+  _getAll() {}
   onSuccess(e) {
-    Linking.openURL(e.data).catch(err => console.error('An error occured', err));
+    Linking.openURL(e.data).catch(err =>
+      console.error("An error occured", err)
+    );
   }
   async componentDidMount() {
     // TODO: You: Do firebase things
@@ -59,7 +64,7 @@ export default class Reply extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.Scrollcontainer}>
-          <CardLeaveList
+        <CardLeave
             profile_icon={items_Text[0].children[0].profile_icon}
             profile_name={items_Text[0].children[0].profile_name}
             leave_type={items_Text[0].children[0].leave_type}
@@ -69,21 +74,15 @@ export default class Reply extends Component {
             leave_end_time={items_Text[0].children[0].leave_end_time}
             leave_desc={items_Text[0].children[0].leave_desc}
             leave_apply_date={items_Text[0].children[0].leave_apply_date} />
-          {/* <Card /> */}
-          {/* <Button style={styles.ButtonCard} /> */}
-          {/* < TouchableOpacity title='GET' style={styles.ButtonCard} onPress={this._getAll} /> */}
-          {/* <Card /> */}
-          {/* <Card /> */}
         </ScrollView>
       </SafeAreaView>
     );
-  };
+  }
 }
-
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
     // justifyContent: 'center',
     // alignItems: 'center',
     // backgroundColor: '#6787A0',
@@ -91,6 +90,6 @@ const styles = StyleSheet.create({
   },
   Scrollcontainer: {
     flex: 1,
-    padding: 10,
+    padding: 10
   },
 });
