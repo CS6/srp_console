@@ -124,10 +124,11 @@ export default class RequestLeave extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+
     // justifyContent: 'center',
     // alignItems: 'center',
-    // backgroundColor: '#6787A0',
     // padding: 20
   },
   Scrollcontainer: {
