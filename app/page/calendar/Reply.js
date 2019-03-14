@@ -20,6 +20,7 @@ import CardLeaveList from '../../components/CardLeaveList';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
+const url = 'https://us-central1-my-fuck-awesome-project.cloudfunctions.net/getLeaveNoteList';
 
 const items_Text = [
   {
@@ -43,30 +44,76 @@ const items_Text = [
 export default class Reply extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      issuer: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+      isLoading: true,
+    };
   }
+
+  componentDidMount() {
+    this.onPost();
+  }
+
+  onPost = () =>{
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({
+        "uid": this.state.issuer,
+        "unAuthNotes":false,
+        "authedNotes":true,
+        "offset":0,
+        "limit":1000
+      })
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      if (data.excutionResult == "success") {
+        console.warn(data.leaveNote)
+        this.setState({
+          isLoading: false,
+          leaveNote: data.leaveNote,
+        }, function(){
+
+        });
+      }
+    }).catch((err) => {
+      console.warn('錯誤:', err);
+    });
+  }
+
   render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.Scrollcontainer}>
-          <CardLeaveList
-            profile_icon={items_Text[0].children[0].profile_icon}
-            profile_name={items_Text[0].children[0].profile_name}
-            leave_type={items_Text[0].children[0].leave_type}
-            leave_start_date={items_Text[0].children[0].leave_start_date}
-            leave_end_date={items_Text[0].children[0].leave_end_date}
-            leave_start_time={items_Text[0].children[0].leave_start_time}
-            leave_end_time={items_Text[0].children[0].leave_end_time}
-            leave_desc={items_Text[0].children[0].leave_desc}
-            leave_apply_date={items_Text[0].children[0].leave_apply_date} />
-          {/* <Card /> */}
-          {/* <Button style={styles.ButtonCard} /> */}
-          {/* < TouchableOpacity title='GET' style={styles.ButtonCard} onPress={this._getAll} /> */}
-          {/* <Card /> */}
-          {/* <Card /> */}
-        </ScrollView>
-      </SafeAreaView>
-    );
+    if(this.state.isLoading){
+      return(
+        <View></View>
+      )
+    }
+    else{
+      return (
+        <SafeAreaView style={styles.container}>
+          <ScrollView style={styles.Scrollcontainer}>
+            {this.state.leaveNote.map((note) => {
+              return (
+                <CardLeaveList
+                  profile_icon={items_Text[0].children[0].profile_icon}
+                  profile_name={note.issuerName}
+                  leave_type={note.type}
+                  leave_start_date={items_Text[0].children[0].leave_start_date}
+                  leave_end_date={items_Text[0].children[0].leave_end_date}
+                  leave_start_time={items_Text[0].children[0].leave_start_time}
+                  leave_end_time={items_Text[0].children[0].leave_end_time}
+                  leave_desc={note.desc}
+                  leave_apply_date={items_Text[0].children[0].leave_apply_date} />
+              );
+            })}
+          </ScrollView>
+        </SafeAreaView>
+      );
+
+    }
+
   };
 }
 

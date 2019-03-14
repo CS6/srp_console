@@ -17,6 +17,7 @@ import ScrollableTabView, { ScrollableTabBar, DefaultTabBar } from 'react-native
 import { SafeAreaView, } from 'react-navigation';
 import Reply from './Reply';
 import Request from './RequestLeave';
+
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 
@@ -29,17 +30,12 @@ export default class Calendar extends Component {
     headerStyle: {
       // backgroundColor: '#f4511e',
       backgroundColor: '#D0E889',
-
-
     },
     headerTitleStyle: { flex: 1, textAlign: 'center' },
     headerRight: (  //定义导航栏右侧的按钮
       // <Text style={{width:1}}></Text>
       <Text />
-
     ),
-
-
   };
 
   state = {
@@ -62,32 +58,21 @@ export default class Calendar extends Component {
     }, 0)
   }
 
-
-
   // 滑动tab
   renderScrollableTab() {
     let label = this.state.label
     if (this.state.tabShow) {
       return (
-
         <ScrollableTabView
           renderTabBar={() => <ScrollableTabBar />}
           tabBarBackgroundColor='#fff'
           tabBarActiveTextColor='#6787A0'
           tabBarUnderlineStyle='#2562b4'
-
           tabBarInactiveTextColor='#333'
-
-
           tabBarUnderlineStyle={styles.tabBarUnderline}
-        >
-
-          {
-            label.map((item, index) => {
-
+          onChangeTab={() => this.setState({tabShow: true})}>
+          {label.map((item, index) => {
               switch (item) {
-
-
                 case '未審核':
                   return (
                     <Request tabLabel={item} key={index} />
@@ -98,7 +83,6 @@ export default class Calendar extends Component {
                     <Reply tabLabel={item} key={index} />
                   )
                   break;
-
                 default:
                   return (
                     <Request tabLabel={item} key={index} />
@@ -116,22 +100,14 @@ export default class Calendar extends Component {
 
   render() {
     return (
-
-
-
       <SafeAreaView style={styles.container}>
         <View style={{ flex: 1 }}>
           {this.renderScrollableTab()}
         </View>
-
       </SafeAreaView>
-
-
     );
   };
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

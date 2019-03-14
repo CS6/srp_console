@@ -66,9 +66,9 @@ export default class RequestLeave extends Component {
       body:JSON.stringify({
         "uid": this.state.issuer,
         "unAuthNotes":true,
-        "authedNotes":true,
+        "authedNotes":false,
         "offset":0,
-        "limit":5
+        "limit":1000
       })
     }).then((response) => {
       return response.json()
@@ -102,14 +102,15 @@ export default class RequestLeave extends Component {
            return (
             <CardLeave
             profile_icon={items_Text[0].children[0].profile_icon}
-            profile_name={note.issuerName.toString}
+            profile_name={note.issuerName}
             leave_type={note.type}
             leave_start_date={items_Text[0].children[0].leave_start_date}
             leave_end_date={items_Text[0].children[0].leave_end_date}
             leave_start_time={items_Text[0].children[0].leave_start_time}
             leave_end_time={items_Text[0].children[0].leave_end_time}
             leave_desc={note.desc}
-            leave_apply_date={items_Text[0].children[0].leave_apply_date} />
+            leave_apply_date={items_Text[0].children[0].leave_apply_date} 
+            leave_note_id = {note.uid}/>
            );
         })}
           </ScrollView>

@@ -18,18 +18,51 @@ import {
 
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Card from './Card';
+
 // import { SafeAreaView, } from 'react-navigation';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
+const url = 'https://us-central1-my-fuck-awesome-project.cloudfunctions.net/authorizeAbsentNote';
 
 export default class CardLeave extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalApprovalVisible: false,
-      modalDisapprovalVisible: false
+      modalDisapprovalVisible: false,
+      issuer: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+      leaveReason: null,
+      isLoading: false,
     };
+  }
+
+  sendApprovalToApi(leaveNoteUID, trueOrFalse, leaveReason){
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({
+        "leaveNoteUID": leaveNoteUID,
+        "authorizerUID": this.state.issuer,
+        "approve_desc": leaveReason,
+        "is_proved": trueOrFalse
+      })
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      console.warn('是否:', data.excutionResult);
+      if (data.excutionResult == "success") {
+        this.setState({
+          isLoading: true,
+          leaveNote: data.leaveNote,
+        }, function(){
+        });
+      }
+    }).catch((err) => {
+      console.warn('錯誤:', err);
+    });
   }
 
   setApprovalVisible(visible) {
@@ -40,114 +73,129 @@ export default class CardLeave extends Component {
   }
   
   render() {
-    return (
-      <View >
-        <Card body={
-          <View style={styles.cardContent}>
-            <View style={styles.cardItemImg}>
-              <Image style={styles.profileImg} source={this.props.profile_icon} />
-            </View>
-            <View style={styles.cardItemTextSection}>
-              <View style={styles.cardItemText}>
-                <View>
-                  <Text style={styles.profileName}>{this.props.profile_name}</Text>
-                  <Text />
-                  <Text style={styles.leaveType}>{this.props.leave_type}</Text>
+    let leaveReason = this.state.leaveReason;
+    if(this.state.isLoading){
+      return(
+        <View></View>
+      )
+    }
+    else{
+      return (
+        <View >
+          <Card body={
+            <View style={styles.cardContent}>
+              <View style={styles.cardItemImg}>
+                <Image style={styles.profileImg} source={this.props.profile_icon} />
+              </View>
+              <View style={styles.cardItemTextSection}>
+                <View style={styles.cardItemText}>
+                  <View>
+                    <Text style={styles.profileName}>{this.props.profile_name}</Text>
+                    <Text />
+                    <Text style={styles.leaveType}>{this.props.leave_type}</Text>
+                  </View>
+                  <View style={styles.cardItemDate}>
+                    <Text style={styles.cardItemLeaveDate}>{this.props.leave_start_date}</Text>
+                    <Text>       ｜</Text>
+                    <Text style={styles.cardItemLeaveDate}>{this.props.leave_end_date}</Text>
+                  </View>
+                  <View style={styles.cardItemDate}>
+                    <Text style={styles.cardItemLeaveDate}>{this.props.leave_start_time}</Text>
+                    <Text>   ｜</Text>
+                    <Text style={styles.cardItemLeaveDate}>{this.props.leave_end_time}</Text>
+                  </View>
                 </View>
-                <View style={styles.cardItemDate}>
-                  <Text style={styles.cardItemLeaveDate}>{this.props.leave_start_date}</Text>
-                  <Text>       ｜</Text>
-                  <Text style={styles.cardItemLeaveDate}>{this.props.leave_end_date}</Text>
-                </View>
-                <View style={styles.cardItemDate}>
-                  <Text style={styles.cardItemLeaveDate}>{this.props.leave_start_time}</Text>
-                  <Text>   ｜</Text>
-                  <Text style={styles.cardItemLeaveDate}>{this.props.leave_end_time}</Text>
+                <View style={styles.cardItemMoreText}>
+                  <Text style={styles.cardItemDesc}>{this.props.leave_desc}</Text>
+                  <Text style={styles.cardItemApplyDate}>申請日期: {this.props.leave_apply_date}</Text>
                 </View>
               </View>
-              <View style={styles.cardItemMoreText}>
-                <Text style={styles.cardItemDesc}>{this.props.leave_desc}</Text>
-                <Text style={styles.cardItemApplyDate}>申請日期: {this.props.leave_apply_date}</Text>
+              <View style={styles.cardButtonSection}>
+                <View style={styles.cardButton}>
+                  <TouchableHighlight
+                    onPress={() => { this.setApprovalVisible(true); }}>
+                    <Icon name="check-circle" size={30} color="#7094B1" solid />
+                  </TouchableHighlight>
+                </View>
+                <View style={styles.cardButton}>
+                  <TouchableHighlight
+                    onPress={() => { this.setDisapprovalVisible(true); }}>
+                    <Icon name="times-circle" size={30} color="#9D9D9D" solid />
+                  </TouchableHighlight>
+                </View>
               </View>
-            </View>
-            <View style={styles.cardButtonSection}>
-              <View style={styles.cardButton}>
-                <TouchableHighlight
-                  onPress={() => { this.setApprovalVisible(true); }}>
-                  <Icon name="check-circle" size={30} color="#7094B1" solid />
-                </TouchableHighlight>
-              </View>
-              <View style={styles.cardButton}>
-                <TouchableHighlight
-                  onPress={() => { this.setDisapprovalVisible(true); }}>
-                  <Icon name="times-circle" size={30} color="#9D9D9D" solid />
-                </TouchableHighlight>
-              </View>
-            </View>
-            <Modal
-              animationType="fade"
-              transparent="true"
-              visible={this.state.modalApprovalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-              }}>
-              <View style={styles.cardModal}>
-                <View style={styles.cardModalContent}>
-                  <Text style={styles.cardModalText}>確定核准假單？</Text>
-                  <View style={styles.cardModalButton}>
-                    <View style={styles.cardModalCancel}>
-                      <TouchableHighlight
-                        onPress={() => { this.setApprovalVisible(!this.state.modalApprovalVisible); }}>
-                        <Text style={styles.cardModalCancelText}>取消</Text>
-                      </TouchableHighlight>
-                    </View>
-                    <View style={styles.cardModalConfirm}>
-                      <TouchableHighlight
-                        onPress={() => { this.setApprovalVisible(!this.state.modalApprovalVisible); }}>
-                        <Text style={styles.cardModalConfirmText}>確定</Text>
-                      </TouchableHighlight>
+              <Modal
+                animationType="fade"
+                transparent="true"
+                visible={this.state.modalApprovalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                }}>
+                <View style={styles.cardModal}>
+                  <View style={styles.cardModalContent}>
+                    <Text style={styles.cardModalText}>確定核准假單？</Text>
+                    <View style={styles.cardModalButton}>
+                      <View style={styles.cardModalCancel}>
+                        <TouchableHighlight
+                          onPress={() => { this.setApprovalVisible(!this.state.modalApprovalVisible); }}>
+                          <Text style={styles.cardModalCancelText}>取消</Text>
+                        </TouchableHighlight>
+                      </View>
+                      <View style={styles.cardModalConfirm}>
+                        <TouchableHighlight
+                          onPress={() => { 
+                            this.setApprovalVisible(!this.state.modalApprovalVisible); 
+                            this.sendApprovalToApi(this.props.leave_note_id, true, "");
+                            }}>
+                          <Text style={styles.cardModalConfirmText}>確定</Text>
+                        </TouchableHighlight>
+                      </View>
                     </View>
                   </View>
                 </View>
-              </View>
-            </Modal>
-            <Modal
-              animationType="fade"
-              transparent="true"
-              visible={this.state.modalDisapprovalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-              }}>
-              <View style={styles.cardModal}>
-                <View style={styles.cardModalContent}>
-                  {/* <Text style={styles.cardModalText}>不核准原因</Text> */}
-                  <TextInput
-                    style={styles.cardModalTextbox}
-                    placeholder="不核准原因"
-                    onChangeText={(txt) => { this.setState({ key: txt }) }}
-                    value={this.state.key} />
-                  <View style={styles.cardModalButton}>
-                    <View style={styles.cardModalCancel}>
-                      <TouchableHighlight
-                        onPress={() => { this.setDisapprovalVisible(!this.state.modalDisapprovalVisible); }}>
-                        <Text style={styles.cardModalCancelText}>取消</Text>
-                      </TouchableHighlight>
-                    </View>
-                    <View style={styles.cardModalConfirm}>
-                      <TouchableHighlight
-                        onPress={() => { this.setDisapprovalVisible(!this.state.modalDisapprovalVisible); }}>
-                        <Text style={styles.cardModalConfirmText}>送出</Text>
-                      </TouchableHighlight>
+              </Modal>
+              <Modal
+                animationType="fade"
+                transparent="true"
+                visible={this.state.modalDisapprovalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                }}>
+                <View style={styles.cardModal}>
+                  <View style={styles.cardModalContent}>
+                    {/* <Text style={styles.cardModalText}>不核准原因</Text> */}
+                    <TextInput
+                      style={styles.cardModalTextbox}
+                      placeholder="不核准原因"
+                      onChangeText={(txt) => { this.setState({ leaveReason: txt }) }}
+                      value={leaveReason} />
+                    <View style={styles.cardModalButton}>
+                      <View style={styles.cardModalCancel}>
+                        <TouchableHighlight
+                          onPress={() => { this.setDisapprovalVisible(!this.state.modalDisapprovalVisible); }}>
+                          <Text style={styles.cardModalCancelText}>取消</Text>
+                        </TouchableHighlight>
+                      </View>
+                      <View style={styles.cardModalConfirm}>
+                        <TouchableHighlight
+                          onPress={() => { 
+                            this.setDisapprovalVisible(!this.state.modalDisapprovalVisible); 
+                            this.sendApprovalToApi(this.props.leave_note_id, false, leaveReason);
+                            }}>
+                          <Text style={styles.cardModalConfirmText}>送出</Text>
+                        </TouchableHighlight>
+                      </View>
                     </View>
                   </View>
                 </View>
-              </View>
-            </Modal>
-          </View>
+              </Modal>
+            </View>
+  
+          } />
+        </View>
+      );
+    }
 
-        } />
-      </View>
-    );
   }
 }
 
