@@ -136,8 +136,6 @@ const items_work = [
   },
 ]
 
-
-
 export default class Ｄispatch extends Component {
   static navigationOptions = {
 
