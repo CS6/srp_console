@@ -549,6 +549,3 @@ const styles = StyleSheet.create({
   }
 
 });
-
-
-
