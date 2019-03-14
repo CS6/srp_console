@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 import CardLeaveList from '../../components/CardLeaveList';
+import moment from "moment";
 // import CheckBox from 'react-native-check-box';
 // import { SafeAreaView, } from 'react-navigation';
 
@@ -54,18 +55,18 @@ export default class Reply extends Component {
     this.onPost();
   }
 
-  onPost = () =>{
+  onPost = () => {
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body:JSON.stringify({
+      body: JSON.stringify({
         "uid": this.state.issuer,
-        "unAuthNotes":false,
-        "authedNotes":true,
-        "offset":0,
-        "limit":1000
+        "unAuthNotes": false,
+        "authedNotes": true,
+        "offset": 0,
+        "limit": 1000
       })
     }).then((response) => {
       return response.json()
@@ -75,7 +76,7 @@ export default class Reply extends Component {
         this.setState({
           isLoading: false,
           leaveNote: data.leaveNote,
-        }, function(){
+        }, function () {
 
         });
       }
@@ -85,12 +86,12 @@ export default class Reply extends Component {
   }
 
   render() {
-    if(this.state.isLoading){
-      return(
+    if (this.state.isLoading) {
+      return (
         <View></View>
       )
     }
-    else{
+    else {
       return (
         <SafeAreaView style={styles.container}>
           <ScrollView style={styles.Scrollcontainer}>
@@ -100,12 +101,12 @@ export default class Reply extends Component {
                   profile_icon={items_Text[0].children[0].profile_icon}
                   profile_name={note.issuerName}
                   leave_type={note.type}
-                  leave_start_date={items_Text[0].children[0].leave_start_date}
-                  leave_end_date={items_Text[0].children[0].leave_end_date}
-                  leave_start_time={items_Text[0].children[0].leave_start_time}
-                  leave_end_time={items_Text[0].children[0].leave_end_time}
+                  leave_start_date={moment(note.startLeaveTime._seconds * 1000).format("YYYY/MM/DD")}
+                  leave_end_date={moment(note.endLeaveTime._seconds * 1000).format("YYYY/MM/DD")}
+                  leave_start_time={moment(note.startLeaveTime._seconds * 1000).format("hh:mm a")}
+                  leave_end_time={moment(note.endLeaveTime._seconds * 1000).format("hh:mm a")}
                   leave_desc={note.desc}
-                  leave_apply_date={items_Text[0].children[0].leave_apply_date} />
+                  leave_apply_date={moment(note.issueTime._seconds * 1000).format("YYYY/MM/DD")} />
               );
             })}
           </ScrollView>

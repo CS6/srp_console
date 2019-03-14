@@ -17,6 +17,7 @@ import {
 } from "react-native";
 
 import CardLeave from '../../components/CardLeave';
+import moment from "moment";
 // import { SafeAreaView, } from 'react-navigation';
 
 // 取得屏幕的宽高Dimensions
@@ -104,12 +105,12 @@ export default class RequestLeave extends Component {
             profile_icon={items_Text[0].children[0].profile_icon}
             profile_name={note.issuerName}
             leave_type={note.type}
-            leave_start_date={items_Text[0].children[0].leave_start_date}
-            leave_end_date={items_Text[0].children[0].leave_end_date}
-            leave_start_time={items_Text[0].children[0].leave_start_time}
-            leave_end_time={items_Text[0].children[0].leave_end_time}
+            leave_start_date={moment(note.startLeaveTime._seconds*1000).format("YYYY/MM/DD")}
+            leave_end_date={moment(note.endLeaveTime._seconds*1000).format("YYYY/MM/DD")}
+            leave_start_time={moment(note.startLeaveTime._seconds*1000).format("hh:mm a")}
+            leave_end_time={moment(note.endLeaveTime._seconds*1000).format("hh:mm a")}
             leave_desc={note.desc}
-            leave_apply_date={items_Text[0].children[0].leave_apply_date} 
+            leave_apply_date={moment(note.issueTime._seconds*1000).format("YYYY/MM/DD")} 
             leave_note_id = {note.uid}/>
            );
         })}
