@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   StyleSheet,
   View,
   Text,
@@ -80,13 +81,34 @@ class ApplyLeaveForm extends React.Component {
       selectedLeaveType: null,
       startModalVisible: false,
       endModalVisible: false,
-      issuer: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+      userToken: "A",
       leaveReason: null,
     };
     this.onStartDateChange = this.onStartDateChange.bind(this);
     this.onEndDateChange = this.onEndDateChange.bind(this);
   }
 
+
+  componentDidMount() {
+    this.getStorage().done();
+
+  }
+
+  getStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userToken');
+      if (value !== null) {
+        console.warn(value);
+        this.setState({ userToken: value });
+        this.JSON_Post();
+        console.warn('再次', await AsyncStorage.getItem('userToken'));
+        this.onPost();
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   onStartDateChange(date, endDate) {
     this.setState({
       selectedStartDate: date,
@@ -115,7 +137,7 @@ class ApplyLeaveForm extends React.Component {
         'Content-Type': 'application/json'
       },
       body:JSON.stringify({
-        "issuer": this.state.issuer,
+        "issuer": this.state.userToken,
         "type":selectedLeaveType, 
         "startLeaveTime": Number(selectedStartDate), 
         "endLeaveTime": Number(selectedEndDate),

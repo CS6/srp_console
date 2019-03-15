@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   Platform,
   StyleSheet,
   View,
@@ -11,13 +12,13 @@ import {
   ScrollView,
   TextInput,
   Button,
-  SafeAreaView
+  RefreshControl,
 } from 'react-native';
 
 import CardLeaveList from '../../components/CardLeaveList';
 import moment from "moment";
 // import CheckBox from 'react-native-check-box';
-// import { SafeAreaView, } from 'react-navigation';
+import { SafeAreaView, } from 'react-navigation';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
@@ -46,13 +47,39 @@ export default class Reply extends Component {
   constructor() {
     super();
     this.state = {
-      issuer: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+      userToken: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
       isLoading: true,
+      refreshing: false,
+
     };
   }
 
+
   componentDidMount() {
+    this.getStorage().done();
+
+  }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
     this.onPost();
+    // this.setState({refreshing: false});
+  }
+  
+
+  getStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userToken');
+      if (value !== null) {
+        console.warn("哈哈"+value);
+        this.setState({ userToken: value });
+        // console.warn('Reply', await AsyncStorage.getItem('userToken'));
+        this.onPost();
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onPost = () => {
@@ -62,7 +89,7 @@ export default class Reply extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "uid": this.state.issuer,
+        "uid": this.state.userToken,
         "unAuthNotes": false,
         "authedNotes": true,
         "offset": 0,
@@ -94,8 +121,12 @@ export default class Reply extends Component {
     else {
       return (
         <SafeAreaView style={styles.container}>
-          <ScrollView style={styles.Scrollcontainer}>
-            {this.state.leaveNote.map((note) => {
+       <ScrollView style={styles.Scrollcontainer}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}/>}>            
+              {this.state.leaveNote.map((note) => {
               return (
                 <CardLeaveList
                   profile_icon={items_Text[0].children[0].profile_icon}

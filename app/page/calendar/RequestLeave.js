@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   Platform,
+  AsyncStorage,
   StyleSheet,
   View,
   Text,
@@ -11,14 +12,15 @@ import {
   ScrollView,
   TextInput,
   Button,
-  SafeAreaView,
   TouchableHighlight,
+  RefreshControl,
+
   Modal
 } from "react-native";
 
 import CardLeave from '../../components/CardLeave';
 import moment from "moment";
-// import { SafeAreaView, } from 'react-navigation';
+import { SafeAreaView, } from 'react-navigation';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get("window");
@@ -49,15 +51,40 @@ export default class RequestLeave extends Component {
   constructor() {
     super();
     this.state = {
-      issuer: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+      userToken: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
       isLoading: true,
+      refreshing: false,
+
     };
   }
 
   componentDidMount() {
-    this.onPost();
-  }
+    this.getStorage().done();
 
+  }
+  
+  
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.onPost();
+    // this.setState({refreshing: false});
+  }
+  
+
+  getStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userToken');
+      if (value !== null) {
+        console.warn(value);
+        this.setState({ userToken: value });
+        // console.warn('再次', await AsyncStorage.getItem('userToken'));
+        this.onPost();
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   onPost = () =>{
     fetch(url, {
       method: 'POST',
@@ -65,7 +92,7 @@ export default class RequestLeave extends Component {
         'Content-Type': 'application/json'
       },
       body:JSON.stringify({
-        "uid": this.state.issuer,
+        "uid": this.state.userToken,
         "unAuthNotes":true,
         "authedNotes":false,
         "offset":0,
@@ -97,8 +124,11 @@ export default class RequestLeave extends Component {
     else{
       return (
         <SafeAreaView style={styles.container}>
-          <ScrollView style={styles.Scrollcontainer}>
-  
+       <ScrollView style={styles.Scrollcontainer}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}/>}>  
           {this.state.leaveNote.map((note) => {
            return (
             <CardLeave
