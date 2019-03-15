@@ -17,7 +17,7 @@ import CardUserInfo from '../../components/CardUserInfo';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
-const userToken = "778TIlaNHBcW1lwvk3dZ1HuTuPv1";
+// const userToken = "778TIlaNHBcW1lwvk3dZ1HuTuPv1";
 
 
 class Card_Top extends React.Component {
@@ -271,7 +271,7 @@ export default class User extends Component {
             verified: true,
             gender: null,
             value: "",
-
+            userToken:"",
             user_info_data: null,
             refreshing: false,
         };
@@ -296,7 +296,18 @@ componentDidMount() {
       // this.setState({refreshing: false});
   }
 
-
+  getStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userToken');
+      if (value !== null) {
+        console.warn(value);
+        this.setState({ userToken: value });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
 
   JSON_Post = () => {
     let url = 'https://us-central1-my-fuck-awesome-project.cloudfunctions.net/getUserDetail';
@@ -331,7 +342,7 @@ componentDidMount() {
             // "phoneNumber": this.PH,
 
 
-            "uid": userToken
+            "uid": this.state.userToken
 
 
 
@@ -383,6 +394,7 @@ JSON_body = (A) => {
     render() {
         return (
             <View style={styles.container}>
+            
                 <ScrollView style={styles.Scrollcontainer}
                     refreshControl={
                         <RefreshControl
@@ -390,6 +402,17 @@ JSON_body = (A) => {
                             onRefresh={this._onRefresh} />}>
                     {/* <View style={styles.container}> */}
                     <Card_Top />
+
+       
+            <Button
+              title="新2"
+              onPress={() => {
+                // this._retrieveData();
+                this.getStorage().done();
+
+              }}
+            />
+
                     {/* <Card_Body /> */}
                     <CardUserInfo
                         phoneNumber={this.state.phoneNumber}

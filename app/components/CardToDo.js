@@ -19,8 +19,8 @@ export default class CardToDo extends Component {
           <View style={{ flex: 1,paddingVertical:15 }}>
 
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: "space-around" }}>
-              <Text style={{ fontSize: 42, color: '#FFFFFF', paddingRight: 15 }}>{"生態組"}</Text>
-              <Text style={{ fontSize: 22, color: '#FFFFFF', paddingLeft: 15, paddingVertical: 10 }}>{"巨木步道開路"}</Text>
+              <Text style={{ fontSize: 42, color: '#FFFFFF', paddingRight: 15 }}>{this.props.team}</Text>
+              <Text style={{ fontSize: 22, color: '#FFFFFF', paddingLeft: 15, paddingVertical: 10 }}>{this.props.desc}</Text>
             </View>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-start" }}>
               <Text style={{ fontSize: 22, color: '#FFFFFF', paddingLeft: 15, paddingVertical: 10 }}>{"共事人員"}</Text>

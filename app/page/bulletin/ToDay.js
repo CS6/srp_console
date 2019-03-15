@@ -22,7 +22,7 @@ import CardNotice from '../../components/CardNotice';
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 
-const userToken = "778TIlaNHBcW1lwvk3dZ1HuTuPv1";
+// const userToken = "778TIlaNHBcW1lwvk3dZ1HuTuPv1";
 
 const items_Text =[
   {
@@ -60,46 +60,46 @@ const items_Text =[
  },
 ]
 
-class Card_A extends React.Component {
+// class Card_A extends React.Component {
 
 
-  // 滑动tab
-  renderScrollableTab() {
-    return (
-      <View style={{ flex: 1,padding:15,     }}>
-        <View style={{ flex: 1, flexDirection:'column',justifyContent: 'center'}}>
+//   // 滑动tab
+//   renderScrollableTab() {
+//     return (
+//       <View style={{ flex: 1,padding:15,     }}>
+//         <View style={{ flex: 1, flexDirection:'column',justifyContent: 'center'}}>
 
-        {/* <Text style={{ fontSize:22, }}>{items_Text[0].children[0].title }</Text> */}
-        <Text style={{ fontSize:22, }}>{msg.announcement[0].title}</Text>
+//         {/* <Text style={{ fontSize:22, }}>{items_Text[0].children[0].title }</Text> */}
+//         <Text style={{ fontSize:22, }}>{msg.announcement[0].title}</Text>
 
-                  {/* <Icon>{items_Text[0].children[0].name }</Icon> */}
+//                   {/* <Icon>{items_Text[0].children[0].name }</Icon> */}
 
-        </View>
+//         </View>
 
-        <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-        {/* <Text style={{ fontSize:14,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{items_Text[0].children[0].bady }</Text> */}
-        <Text style={{ fontSize:14,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{msg.announcement[0].detail}</Text>
-        {/* <Text style={{ fontSize:14,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{msg.excutionResult}</Text> */}
+//         <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+//         {/* <Text style={{ fontSize:14,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{items_Text[0].children[0].bady }</Text> */}
+//         <Text style={{ fontSize:14,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{msg.announcement[0].detail}</Text>
+//         {/* <Text style={{ fontSize:14,flex: 1,lineHeight:24, justifyContent: 'center', alignItems: 'center' }}>{msg.excutionResult}</Text> */}
 
-        </View>
+//         </View>
 
-      </View>
-////待實作for迴圈自動填入
-    )
-  }
+//       </View>
+// ////待實作for迴圈自動填入
+//     )
+//   }
 
-  render() {
-    return (
+//   render() {
+//     return (
 
          
-          <View style={styles.card}>
-            {this.renderScrollableTab()}
+//           <View style={styles.card}>
+//             {this.renderScrollableTab()}
 
 
-          </View>
-    );
-  }
-}
+//           </View>
+//     );
+//   }
+// }
 
 
 // class Card_A extends React.Component {
@@ -128,165 +128,6 @@ class Card_A extends React.Component {
 // }
 
 
-
-var msg = {
-  "excutionResult": "success",
-  "announcement": [
-      {
-          "detail": "文豪可以置頂一下 目前有哪些還沒做完嗎？我需要排一下工作時程我這邊目前還沒實裝 登入模組 跟 權限切換開關",
-          "issueTime": {
-              "_seconds": 1552378089,
-              "_nanoseconds": 876000000
-          },
-          "title": "喵喵喵喵喵",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "的確有這種風險，有關軍教課稅問題，有分別不同的狀況，只有我們台灣降半旗，大家都認為那是炒熱房地產價錢的元凶，理念是一致的，有些很過得去的家庭，我對選舉也不外行，賴委員可能不知道以下的數字，您一向都非常努力爭取桃園地區。",
-          "issueTime": {
-              "_seconds": 1552378036,
-              "_nanoseconds": 659000000
-          },
-          "title": "1月3日臨時動議",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "wsdfghjk",
-          "issueTime": {
-              "_seconds": 1552377911,
-              "_nanoseconds": 960000000
-          },
-          "title": "測試公告OAO",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "wsdfghjk",
-          "issueTime": {
-              "_seconds": 1552377910,
-              "_nanoseconds": 884000000
-          },
-          "title": "測試公告OAO",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "wsdfghjk",
-          "issueTime": {
-              "_seconds": 1552377909,
-              "_nanoseconds": 674000000
-          },
-          "title": "測試公告OAO",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "系統快完成拉OAOOAOOAO",
-          "issueTime": {
-              "_seconds": 1552377349,
-              "_nanoseconds": 51000000
-          },
-          "title": "測試公告OAO",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "系統快完成拉12345678",
-          "issueTime": {
-              "_seconds": 1552377055,
-              "_nanoseconds": 607000000
-          },
-          "title": "測試公告OAO",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "系統快完成拉12345678",
-          "issueTime": {
-              "_seconds": 1552376873,
-              "_nanoseconds": 427000000
-          },
-          "title": "測試公告OAO",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "系統快完成拉12345678",
-          "issueTime": {
-              "_seconds": 1552376867,
-              "_nanoseconds": 787000000
-          },
-          "title": "測試公告1234321234",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "系統快完成拉12345678",
-          "issueTime": {
-              "_seconds": 1552376826,
-              "_nanoseconds": 904000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "系統快完成拉",
-          "issueTime": {
-              "_seconds": 1552376823,
-              "_nanoseconds": 468000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "OAO系統快完成拉OAO",
-          "issueTime": {
-              "_seconds": 1552376820,
-              "_nanoseconds": 118000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "100",
-          "issueTime": {
-              "_seconds": 1552374688,
-              "_nanoseconds": 714000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "4",
-          "issueTime": {
-              "_seconds": 1552373804,
-              "_nanoseconds": 273000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "3",
-          "issueTime": {
-              "_seconds": 1552373800,
-              "_nanoseconds": 502000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "2",
-          "issueTime": {
-              "_seconds": 1552373797,
-              "_nanoseconds": 103000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      },
-      {
-          "detail": "1",
-          "issueTime": {
-              "_seconds": 1552373772,
-              "_nanoseconds": 181000000
-          },
-          "title": "測試公告",
-          "issuer": "gaga"
-      }
-  ]
-}
 let info_data;
 export default class ToDay extends Component {
   constructor() {
@@ -294,6 +135,7 @@ export default class ToDay extends Component {
     this.state = {
       refreshing: false,
       isLoading: true,
+      userToken:"",
       announcement: [
         {
             "detail": "空空der",
@@ -332,7 +174,7 @@ _onRefresh = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "uid":userToken
+        "uid":this.state.userToken
       })
     }).then((response) => {
       return response.json();
@@ -374,6 +216,20 @@ _onRefresh = () => {
     })
 }
 
+
+getStorage = async () => {
+  try {
+    const value = await AsyncStorage.getItem('userToken');
+    if (value !== null) {
+      console.warn(value);
+      this.setState({ userToken: value });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
   onSuccess(e) {
     Linking
       .openURL(e.data)
@@ -399,7 +255,7 @@ _onRefresh = () => {
             <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh}/>}>
-                <CardNotice infoTitle={this.state.announcement[0].title} infoBody={msg.announcement[2].detail}/> 
+                {/* <CardNotice infoTitle={this.state.announcement[0].title} infoBody={this.state.announcement[2].detail}/>  */}
 
                 {this.state.announcement.map((note) => {
            return (
@@ -409,15 +265,25 @@ _onRefresh = () => {
            );
         })}
 
-
+{/* 
                 <CardNotice infoTitle={msg.announcement[3].title} infoBody={msg.announcement[0].detail}/> 
                 <CardNotice infoTitle={msg.announcement[0].title} infoBody={msg.announcement[1].detail}/> 
-                <CardNotice infoTitle={msg.announcement[1].title} infoBody={msg.announcement[2].detail}/> 
+                <CardNotice infoTitle={msg.announcement[1].title} infoBody={msg.announcement[2].detail}/>  */}
           {/* <Button style={styles.ButtonCard}/> */}
-          <TouchableOpacity title='GET' style={styles.ButtonCard} onPress={this.JSON_Post}/>
+          {/* <TouchableOpacity title='GET' style={styles.ButtonCard} onPress={this.JSON_Post}/> */}
 
 
-          <Card_A/>
+       
+          <Button
+              title="新2"
+              onPress={() => {
+                // this._retrieveData();
+                this.getStorage().done();
+
+              }}
+            />
+
+          {/* <Card_A/> */}
         
           </ScrollView>
 

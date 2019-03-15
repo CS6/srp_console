@@ -11,8 +11,9 @@ import {
   ScrollView,
   TextInput,
   Button,
+  AsyncStorage,
   RefreshControl,
-  Alert 
+  Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -22,7 +23,7 @@ import CardMemo from '../../components/CardMemo';
 import CardShowLog from '../../components/CardShowLog';
 
 
-const userToken = "778TIlaNHBcW1lwvk3dZ1HuTuPv1";
+// const userToken = "778TIlaNHBcW1lwvk3dZ1HuTuPv1";
 
 
 
@@ -163,13 +164,45 @@ export default class Works extends Component {
     super();
     this.state = {
       refreshing: false,
+      userToken:"",
+      workAssignment: [
+        {
+          "desc": "砍樹",
+          "modifyUser": "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+          "team": "生態組",
+          "worktime": "晚上",
+          "worker": [
+            "+886912345679"
+          ],
+          "workType": "生態組",
+          "modifyTime": {
+            "_seconds": 1552572335,
+            "_nanoseconds": 201000000
+          }
+        }
+      ]
     };
   }
   componentDidMount() {
     //检测网络是否连接
-    this.JSON_Post();
-  }
 
+    this.getStorage().done();
+
+
+  }
+  getStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userToken');
+      if (value !== null) {
+        console.warn(value);
+        this.setState({ userToken: value });
+        this.JSON_Post();
+        console.warn('再次', await AsyncStorage.getItem('userToken'));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   _onRefresh = () => {
     this.setState({ refreshing: true });
     this.JSON_Post();
@@ -188,7 +221,7 @@ export default class Works extends Component {
       },
 
       body: JSON.stringify({
-        "uid":"778TIlaNHBcW1lwvk3dZ1HuTuPv1"
+        "uid": this.state.userToken
 
       })
     }).then((response) => {
@@ -214,21 +247,48 @@ export default class Works extends Component {
     })
   }
 
+
+  // _retrieveData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem('@MySuperStore:key');
+  //     if (value !== null) {
+  //       // We have data!!
+  //       console.warn(value);
+  //     }
+  //   } catch (error) {
+  //     // Error retrieving data
+  //   }
+  // };
+
+  
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-     <ScrollView style={styles.Scrollcontainer}
+        <ScrollView style={styles.Scrollcontainer}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}/>}>
+              onRefresh={this._onRefresh} />}>
 
 
 
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {/* <Card_Top/> */}
 
-            <CardToDo />
+
+       
+            <Button
+              title="新2"
+              onPress={() => {
+                // this._retrieveData();
+                this.getStorage().done();
+
+              }}
+            />
+
+
+            <CardToDo team={this.state.workAssignment[0].team} desc={this.state.workAssignment[0].desc} />
             <CardMemo />
             <CardShowLog />
             {/* <Card_Body/> */}

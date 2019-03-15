@@ -42,7 +42,7 @@ export default class Scanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      my_Token: "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
+      userToken: "A",
       camera: false,
       A: false,
       camera_state: true,
@@ -53,7 +53,24 @@ export default class Scanner extends Component {
 
     };
   }
+  componentDidMount() {
+    //检测网络是否连接
+    this.getStorage().done();
+  }
 
+  getStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userToken');
+      if (value !== null) {
+        console.warn(value);
+        this.setState({ userToken: value });
+        this.JSON_Post();
+        console.warn('再次', await AsyncStorage.getItem('userToken'));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   componentWillReceiveProps(nextProps) {
     this.setState({
       camera: nextProps.camera,
@@ -99,7 +116,7 @@ export default class Scanner extends Component {
     this.setState.text = '"' + e.data + '"';
     console.log('data', data);
     // Alert.alert('data', data);
-
+    console.warn(Data_Array.userToken);
     Alert.alert(
       // 'Alert Title',
       JSON.stringify(Data_Array.userToken),
@@ -118,23 +135,18 @@ export default class Scanner extends Component {
           }, style: 'cancel'
         },
         // { text: 'OK', onPress: () => this.GC_data() },
-        { text: '簽到去～', onPress: () => this.JSON_Post(Data_Array.userToken).this.setState({ camera_state: true }) },
+        { text: '簽到去～', onPress: () => this.JSON_Post(Data_Array.userToken)},
+        // { text: '簽到去～', onPress: () => this.JSON_Post(Data_Array.userToken).this.setState({ camera_state: true }) },
 
 
       ],
       { cancelable: false }
     )
   }
-  async componentDidMount() {
-    // TODO: You: Do firebase things
-    // const { user } = await firebase.auth().signInAnonymously();
-    // console.warn('User -> ', user.toJSON());
-
-    // await firebase.analytics().logEvent('foo', { bar: '123'});
-  }
 
 
-  JSON_Post = (userToken) => {
+
+  JSON_Post = (byToken) => {
     let url = 'https://us-central1-my-fuck-awesome-project.cloudfunctions.net/punch';
     fetch(url, {
       method: 'POST',
@@ -147,8 +159,8 @@ export default class Scanner extends Component {
 
 
 
-        "employer": this.state.my_Token,
-        "employee": userToken,
+        "employer": this.state.userToken,
+        "employee": byToken,
 
 
 
