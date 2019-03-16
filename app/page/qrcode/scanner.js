@@ -62,10 +62,10 @@ export default class Scanner extends Component {
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
-        console.warn(value);
+        //console.warn(value);
         this.setState({ userToken: value });
         this.JSON_Post();
-        console.warn('再次', await AsyncStorage.getItem('userToken'));
+       // console.warn('再次', await AsyncStorage.getItem('userToken'));
       }
     } catch (error) {
       console.log(error);
@@ -116,7 +116,7 @@ export default class Scanner extends Component {
     this.setState.text = '"' + e.data + '"';
     console.log('data', data);
     // Alert.alert('data', data);
-    console.warn(Data_Array.userToken);
+    //console.warn(Data_Array.userToken);
     Alert.alert(
       // 'Alert Title',
       JSON.stringify(Data_Array.userToken),
@@ -131,7 +131,7 @@ export default class Scanner extends Component {
         {
           text: '我還不想簽到', onPress: () => {
             this.forceUpdate();
-            console.warn("cancel")
+         //   console.warn("cancel")
           }, style: 'cancel'
         },
         // { text: 'OK', onPress: () => this.GC_data() },
@@ -168,9 +168,9 @@ export default class Scanner extends Component {
     }).then((response) => {
       return response.json();
     }).then((jsonData) => {
-      console.warn(jsonData);
+   //   console.warn(jsonData);
     }).catch((err) => {
-      console.warn('錯誤:', err);
+    //  console.warn('錯誤:', err);
     })
   }
 
@@ -228,7 +228,7 @@ export default class Scanner extends Component {
 
 
   render() {
-    console.warn('scanner', this.state.camera_state);
+ //   console.warn('scanner', this.state.camera_state);
     return (
 
       <View style={styles.container}>

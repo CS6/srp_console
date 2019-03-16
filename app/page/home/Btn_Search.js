@@ -20,48 +20,52 @@ class Btn_Search extends React.Component {
 
 
 //页面的组件渲染完毕（render）之后执行
-componentDidMount() {
-    //检测网络是否连接
-    NetInfo.isConnected.fetch().done((isConnected) => {
-        this.setState({isConnected});
-    });
+// componentDidMount() {
+//     //检测网络是否连接
+//     NetInfo.isConnected.fetch().done((isConnected) => {
+//         this.setState({isConnected});
+//     });
 
-    //检测网络连接信息
-    NetInfo.fetch().done((connectionInfo) => {
-        this.setState({connectionInfo});
-    });
+//     //检测网络连接信息
+//     NetInfo.fetch().done((connectionInfo) => {
+//         this.setState({connectionInfo});
+//     });
 
-    //监听网络变化事件
-    NetInfo.addEventListener('change', (networkType) => {
-        this.setState({isConnected: networkType})
-    })
-}
+//     //监听网络变化事件
+//     NetInfo.addEventListener('change', (networkType) => {
+//         this.setState({isConnected: networkType})
+//     })
+// }
   render() {
     return (
-    
-   
-  // <TouchableOpacity onPress={() => { this.props.navigation.navigate('Registered') }}>
-  <TouchableOpacity onPress={() => { this.componentDidMount()}}>
+      <View style={styles.searchBox}>
+      <Text style={styles.searchContent}> 司馬庫斯 </Text>
 
-<View style={styles.searchBox}>
-{this.state.isConnected ? <Icon name={"link"}  style={styles.Icon} />: <Icon name={"unlink"}  style={styles.Icon} />}
+      </View>
+//   // <TouchableOpacity onPress={() => { this.props.navigation.navigate('Registered') }}>
+//   <TouchableOpacity onPress={() => { this.componentDidMount()}}>
 
-          <Text style={styles.searchContent}> 生 態 組 </Text>
-          <Text style={styles.welcome}>
-                    {/* 当前网络连接类型： */}
-                     {this.state.connectionInfo}
-                </Text>
-          <Text style={styles.welcome}>
+// <View style={styles.searchBox}>
 
-                    {/* 当前的网络状态： */}
-                    {this.state.isConnected ? '使用中': '沒有網路'}
-                </Text>
+
+// {this.state.isConnected ? <Icon name={"link"}  style={styles.Icon} />: <Icon name={"unlink"}  style={styles.Icon} />}
+
+//           <Text style={styles.searchContent}> 生 態 組 </Text>
+//           <Text style={styles.welcome}>
+//                     {/* 当前网络连接类型： */}
+//                      {this.state.connectionInfo}
+//                 </Text>
+//           <Text style={styles.welcome}>
+
+//                     {/* 当前的网络状态： */}
+//                     {this.state.isConnected ? '使用中': '沒有網路'}
+//                 </Text>
                
                 
                 
 
-        </View>
-      </TouchableOpacity>
+//         </View>
+//       </TouchableOpacity>
  
     );
   }

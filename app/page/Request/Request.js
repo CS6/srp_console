@@ -98,10 +98,10 @@ class ApplyLeaveForm extends React.Component {
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
-        console.warn(value);
+       // console.warn(value);
         this.setState({ userToken: value });
         this.JSON_Post();
-        console.warn('再次', await AsyncStorage.getItem('userToken'));
+       // console.warn('再次', await AsyncStorage.getItem('userToken'));
         this.onPost();
 
       }
@@ -146,12 +146,12 @@ class ApplyLeaveForm extends React.Component {
     }).then((response) => {
       return response.json()
     }).then((data) => {
-      console.warn(data)
+      //console.warn(data)
       if(data.excutionResult == "success") {
         Alert.alert ("請假成功");
       }
     }).catch((err)=> {
-      console.warn('錯誤:',err)
+      //console.warn('錯誤:',err)
       Alert.alert ("假單發送失敗","請檢查網路");
     });
   }

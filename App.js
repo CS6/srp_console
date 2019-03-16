@@ -23,6 +23,7 @@ import {
   Linking,
 } from 'react-native';
 
+console.disableYellowBox = true;
 
 // import firebase from 'firebase/app'
 // import 'firebase/auth'
@@ -80,15 +81,15 @@ class TokenScreen extends React.Component {
 
 
   save_token_code = () => {
-    console.warn("save")
+    //console.warn("save")
 
     this.setState({
       token_code: this.props.navigation.state.params.token_code,
     }, function () {
       this.save();
-      console.warn("save")
-    }), console.warn("A", this.state.token_code);
-    console.warn("B", this.props.navigation.state.params.token_code);
+     // console.warn("save")
+    }) //console.warn("A", this.state.token_code);
+    //console.warn("B", this.props.navigation.state.params.token_code);
   }
 
   save() {
@@ -326,7 +327,7 @@ class Welcome1 extends React.Component {
         const confirmationResult = await firebase.auth().signInWithPhoneNumber(this.state.phone, captchaVerifier)
         this.setState({ confirmationResult })
       } catch (e) {
-        console.warn(e)
+        //console.warn(e)
       }
 
     }
@@ -345,7 +346,7 @@ class Welcome1 extends React.Component {
     try {
       await confirmationResult.confirm(code)
     } catch (e) {
-      console.warn(e)
+      //console.warn(e)
     }
     this.reset()
   }
@@ -360,8 +361,8 @@ class Welcome1 extends React.Component {
   test = () => {
     this.setState({
       token_code: this.props.navigation.state.params,
-    }), console.warn("A", this.state.token_code);
-    console.warn("B", this.props.navigation.state.params);
+    })//, console.warn("A", this.state.token_code);
+  //  console.warn("B", this.props.navigation.state.params);
   }
 
 

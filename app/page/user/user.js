@@ -90,7 +90,7 @@ export default class User extends Component {
       componentDidMount() {
      
         this.getStorage().done();
-        console.warn('IN the USER' );
+       // console.warn('IN the USER' );
      
      
       }
@@ -100,12 +100,12 @@ export default class User extends Component {
         try {
           const value = await AsyncStorage.getItem('userToken');
           if (value !== null) {
-            console.warn(value);
+            //console.warn(value);
             this.setState({ userToken: value });
             this.JSON_Post();
-            console.warn('IN the USER2' );
+           // console.warn('IN the USER2' );
      
-            console.warn('USER', await AsyncStorage.getItem('userToken'));
+//console.warn('USER', await AsyncStorage.getItem('userToken'));
           }
         } catch (error) {
           console.log(error);
@@ -137,7 +137,7 @@ export default class User extends Component {
                 this.setState({ refreshing: false });
             }
         }).catch((err) => {
-            console.warn('錯誤:', err);
+           // console.warn('錯誤:', err);
             Alert.alert("更新失敗", "請檢查網路");
             this.setState({ refreshing: false });
         })

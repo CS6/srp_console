@@ -33,7 +33,7 @@ _retrieveData = async () => {
    
   <TouchableOpacity onPress={ this._retrieveData}>
         <View style={styles.button}>
-          <Text style={styles.searchContent}>註冊</Text>
+          <Text style={styles.searchContent}>進入ＡＰＰ</Text>
           {/* <Text style={styles.searchContent}>簽下去</Text> */}
 
         </View>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     padding: 10,
     borderRadius: 25,
-    margin: 50
+    margin: 10
   },
   searchIcon: {
     width: 16,

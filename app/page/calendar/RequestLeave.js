@@ -52,12 +52,12 @@ export default class RequestLeave extends Component {
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
-        console.warn(value);
+        //console.warn(value);
         this.setState({ userToken: value });
         this.onPost();
       }
     } catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   }
   onPost = () =>{
@@ -77,7 +77,7 @@ export default class RequestLeave extends Component {
       return response.json()
     }).then((data) => {
       if (data.excutionResult == "success") {
-        console.warn(data.leaveNote)
+       // console.warn(data.leaveNote)
         this.setState({
           isLoading: false,
           leaveNote: data.leaveNote,
@@ -86,7 +86,7 @@ export default class RequestLeave extends Component {
         });
       }
     }).catch((err) => {
-      console.warn('錯誤:', err);
+    //  console.warn('錯誤:', err);
     });
   }
 

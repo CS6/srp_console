@@ -98,16 +98,16 @@ export default class App extends Component<Props> {
 
       })
     }).then((response) => {
-      console.warn(this.SEX, this.NO, this.NY, this.NA, this.JOB, this.PH)
+      //console.warn(this.SEX, this.NO, this.NY, this.NA, this.JOB, this.PH)
 
       return response.json()
     }).then((data) => {
-      console.warn(data)
+    //  console.warn(data)
       if (data.excutionResult == "success") {
         Alert.alert("註冊成功");
       }
     }).catch((err) => {
-      console.warn('錯誤:', err)
+   //   console.warn('錯誤:', err)
       Alert.alert("發送失敗", "請檢查網路");
     });
   }
@@ -161,7 +161,7 @@ export default class App extends Component<Props> {
         {/* <Text style={styles.instructions}>{instructions}</Text> */}
         <TextInput
           style={styles.TextBox}
-          placeholder="電話號碼"
+          placeholder="電話號碼 +886923456789 不加0"
           //onChangeText={(text) => this.setState({text})}
           onChangeText={(text) => { this.PH = text; }}
 
@@ -213,35 +213,35 @@ export default class App extends Component<Props> {
 
  */}
 
+    
+<TouchableOpacity onPress={ this.JSON_Post()}>
+        <View style={styles.button}>
+          <Text style={styles.searchContent}>註冊</Text>
+          {/* <Text style={styles.searchContent}>簽下去</Text> */}
+
+        </View>
+      </TouchableOpacity>
+     
+
         <Btn_Login_set onPress={() => {
 
           this.JSON_Post()
         }} />
 
-        <Button
-          title="更新"
+
+
+
+
+        {/* <Button
+          title="註冊"
           onPress={() => {
             // this.setState({album: data})
-
-            // console.warn(this.state.Te); // gives new value OK
-            // console.warn(this.state.PH); // gives new value OK
-            // console.warn(this.state.NA); // gives new value OK
-            // console.warn(this.state.SEX); // gives new value OK\
-            // console.warn(this.state.JOB); // gives new value OK
-            // console.warn(this.state.NO); // gives new value OK
-            // console.warn(this.state.NY); // gives new value OK
-            // console.warn(this.state.PS); // gives new value OK
 
             this.JSON_Post();
 
 
-            // onPress={() => { this.onGet()}}
-
-
-
-
           }}
-        />
+        /> */}
       </View>
     );
   }
@@ -271,6 +271,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },  searchContent: {
+    color: '#7094B1',
+    fontSize: 20,
   },
   instructions: {
     textAlign: 'center',

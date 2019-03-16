@@ -67,10 +67,10 @@ export default class Works extends Component {
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
-        console.warn(value);
+        //console.warn(value);
         this.setState({ userToken: value });
         this.JSON_Post();
-        console.warn('再次', await AsyncStorage.getItem('userToken'));
+       // console.warn('再次', await AsyncStorage.getItem('userToken'));
       }
     } catch (error) {
       console.log(error);
@@ -100,8 +100,8 @@ export default class Works extends Component {
     }).then((response) => {
       return response.json();
     }).then((jsonData) => {
-      console.warn(jsonData);
-      console.warn(jsonData.excutionResult);
+     // console.warn(jsonData);
+     // console.warn(jsonData.excutionResult);
       if (jsonData.excutionResult == "success") {
         Alert.alert("API成功");
         // this.setState({ refreshing: false });
@@ -124,7 +124,7 @@ export default class Works extends Component {
         // this.forceUpdate();
       }
     }).catch((err) => {
-      console.warn('錯誤:', err);
+      //console.warn('錯誤:', err);
       Alert.alert("錯誤", "請檢查網路");
       this.setState({ refreshing: false });
       // this.forceUpdate();

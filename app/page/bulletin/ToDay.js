@@ -184,11 +184,11 @@ _onRefresh = () => {
     //  info_data = jsonData;
       // this.JSON_body();
       if (jsonData.excutionResult=="success"){
-        console.warn(jsonData.announcement);
-        console.warn(this.state.announcement);
+        //console.warn(jsonData.announcement);
+        //console.warn(this.state.announcement);
         Alert.alert ("更新成功");
         this.setState({refreshing: false,isLoading: false,announcement: jsonData.announcement,});
-        console.warn(JSON.stringify(this.state.announcement));
+        //console.warn(JSON.stringify(this.state.announcement));
         }
         else{
           Alert.alert ("更新失敗","請檢查網路");
@@ -196,7 +196,7 @@ _onRefresh = () => {
           // this.forceUpdate();
         }
     }).catch((err) => {
-      console.warn('錯誤:', err);
+     // console.warn('錯誤:', err);
       Alert.alert ("指派失敗","請檢查網路");
       this.setState({refreshing: false});
       // this.forceUpdate();
@@ -221,7 +221,7 @@ getStorage = async () => {
   try {
     const value = await AsyncStorage.getItem('userToken');
     if (value !== null) {
-      console.warn(value);
+    //  console.warn(value);
       this.setState({ userToken: value });
     }
   } catch (error) {

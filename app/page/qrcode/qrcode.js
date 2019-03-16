@@ -142,10 +142,10 @@ export default class qrcode extends Component {
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
-        console.warn(value);
+      //  console.warn(value);
         this.setState({ userToken: value });
         this.JSON_Post();
-        console.warn('再次', await AsyncStorage.getItem('userToken'));
+       // console.warn('再次', await AsyncStorage.getItem('userToken'));
       }
     } catch (error) {
       console.log(error);
@@ -154,8 +154,8 @@ export default class qrcode extends Component {
 
   get = async () => {
     AsyncStorage.getItem('userToken').then(userToken => this.setState({userToken}))
-    console.warn(userToken);
-        console.warn("OK");
+  //  console.warn(userToken);
+//console.warn("OK");
   }
 
   render() {

@@ -194,7 +194,9 @@ export default class Login_index extends Component {
           this.setStorage();
         }} /> */}
 
-<Button
+{/* 
+  測試用資料按鈕
+  <Button
           title="新"
           onPress={() => {
             Linking.openURL("srpconsole://token/eBuvGEjNMUOo5RrhIs4XQx3hDte2").catch(err => console.error('An error occurred', err));
@@ -210,7 +212,7 @@ export default class Login_index extends Component {
           onPress={() => {
             this.clear();
           }} />
-         
+          */}
 
          
           {/* 
@@ -226,7 +228,9 @@ export default class Login_index extends Component {
 
           < View style={styles.bottmContainer}>
 
-          <Btn_Login />
+          {/*
+          測試用資料按鈕
+          <Btn_Login /> */}
 
       </View>
 
