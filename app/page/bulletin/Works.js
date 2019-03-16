@@ -192,6 +192,9 @@ export default class Works extends Component {
             <Icon name="battery-empty" size={30} color="#900" />
             <Icon name="bed" size={30} color="#900" />
             <Icon name="american-sign-language-interpreting" size={30} color="#777" /> */}
+            <Text>{"ＩＤ"}</Text>
+
+            <Text>{this.state.userToken}</Text>
           </View>
         </ScrollView>
       </SafeAreaView>

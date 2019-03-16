@@ -24,8 +24,8 @@ import {
 } from 'react-native';
 
 
-import firebase from 'firebase/app'
-import 'firebase/auth'
+// import firebase from 'firebase/app'
+// import 'firebase/auth'
 import Btn_setup from './app/page/Login/Btn_setup';
 import Btn_Login from './app/page/Login/Btn_Login';
 
@@ -55,15 +55,15 @@ const o_captchaUrl = "https://my-fuck-awesome-project.firebaseapp.com/captcha.ht
 const captchaUrl = 'https://my-fuck-awesome-project.firebaseapp.com/phone-invisible.html'
 
 
-const config = {
-  apiKey: "AIzaSyDiWvzSG8kFr2oPLyrLleEmxGxMY3ed5Hw",
-  authDomain: "my-fuck-awesome-project.firebaseapp.com",
-  databaseURL: "https://my-fuck-awesome-project.firebaseio.com",
-  projectId: "my-fuck-awesome-project",
-  storageBucket: "my-fuck-awesome-project.appspot.com",
-  messagingSenderId: "885320638463"
-};
-firebase.initializeApp(config);
+// const config = {
+//   apiKey: "AIzaSyDiWvzSG8kFr2oPLyrLleEmxGxMY3ed5Hw",
+//   authDomain: "my-fuck-awesome-project.firebaseapp.com",
+//   databaseURL: "https://my-fuck-awesome-project.firebaseio.com",
+//   projectId: "my-fuck-awesome-project",
+//   storageBucket: "my-fuck-awesome-project.appspot.com",
+//   messagingSenderId: "885320638463"
+// };
+// firebase.initializeApp(config);
 
 type Props = {};
 
@@ -71,20 +71,17 @@ class TokenScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: undefined,
-      phone: '+886908668531',
-      confirmationResult: undefined,
-      code: '',
+     
       token_code: "null",
     }
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user })
-    })
+
   }
 
 
 
   save_token_code = () => {
+    console.warn("save")
+
     this.setState({
       token_code: this.props.navigation.state.params.token_code,
     }, function () {
@@ -101,9 +98,11 @@ class TokenScreen extends React.Component {
     AsyncStorage.multiSet(keyValuePairs, function (errs) {
       if (errs) {
         //TODO：存储出错
+        alert('userToken有問題 請洽管理員!');
+
         return;
       }
-      alert('userToken保存成功!');
+      alert('userToken驗證成功!');
 
     });
   }
@@ -117,7 +116,9 @@ class TokenScreen extends React.Component {
           name: "",
           phone: ""
         });
-        alert('存储的数据已清除完毕!');
+        // alert('存储的数据已清除完毕!');
+        alert('跳轉成功!');
+
       }
     });
 
@@ -159,10 +160,15 @@ class TokenScreen extends React.Component {
               title="登入"/>
     */}
 
+    
           <View style={{justifyContent: 'center'}}>
+          <Text style={styles.welcome}> 步驟一</Text>
+          <Button
+          title="驗證"
+          onPress={this.save_token_code} />
 
             <Text style={styles.welcome}>
-              請按登入
+            步驟二 請按驗證後登入
           </Text>
             <Btn_Login onPress={this.save_token_code} />
             <Text style={styles.welcome}>  或是 註冊 </Text>
@@ -509,7 +515,7 @@ const RootStack = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
 
   }
 );
@@ -564,8 +570,8 @@ export default App = () => <RootStack uriPrefix={prefix} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   home: {

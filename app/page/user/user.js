@@ -31,7 +31,8 @@ class Card_Top extends React.Component {
             <View style={styles.card_Top}>
                 <Image style={styles.profileImg} source={img} />
                 <Text style={{ padding: 15, fontSize: 32, color: '#4A667C' }}>{"拉互依"}</Text>
-                <Btn_Logout/>
+                {/* <Btn_Logout/> */}
+                
                 {/* <Btn_info /> */}
             </View>
         );
