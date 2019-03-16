@@ -77,44 +77,57 @@ export default class App extends Component<Props> {
       */
       body: JSON.stringify({
 
-        // "gender": this.SEX,
-        // "team": "team101",
-        // "workingType": this.NY,
-        // "name": this.NA,
-        // "jobTitle": this.JOB,
-        // "phoneNumber": this.PH,
+        "gender": this.SEX,
+        "team": this.NO,
+        "workingType": this.NY,
+        "name": this.NA,
+        "jobTitle": this.JOB,
+        "phoneNumber": this.PH,
 
         
-          "gender":"male",
-          "team":"team101",
-          "workingType":"fullTime",
-          "name":"QAQ",
-          "jobTitle":"ironman",
-          "phoneNumber":"+886910927898"
+          // "gender":"male",
+          // "team":"team101",
+          // "workingType":"fullTime",
+          // "name":"QAQ",
+          // "jobTitle":"ironman",
+          // "phoneNumber":"+886910927898"
           
         
 
 
       })
     }).then((response) => {
-      return response.json();
-    }).then((jsonData) => {
-      console.warn(jsonData);
-    }).catch((err) => {
-      console.warn('錯誤:', err);
-    })
+      console.warn(this.SEX,this.NO,this.NY,this.NA,this.JOB,this.PH,)
+
+      return response.json()
+    }).then((data) => {
+      console.warn(data)
+      if(data.excutionResult == "success") {
+        Alert.alert ("註冊成功");
+      }
+    }).catch((err)=> {
+      console.warn('錯誤:',err)
+      Alert.alert ("發送失敗","請檢查網路");
+    });
   }
 
+
   render() {
+    // let gender_data = [{
+    //   value: '男',key: 'male'
+    // }, {
+    //   value: '女',key: 'female'
+      
+    // }];
     let gender_data = [{
-      value: '男',
+      value: 'male',key: 'male'
     }, {
-      value: '女',
+      value: 'female',key: 'female'
+      
     }];
-  
 
     let group_data = [{
-      value: '房務組',name: 'ABC',
+      value: '房務組',key: '房務組',
     }, {
       value: '餐廳組',
     }, {
@@ -130,12 +143,16 @@ export default class App extends Component<Props> {
     }, {
       value: '其他',
     }];
-  
     let if_fulltime_data = [{
-      value: '是',
+      value: 'fullTime',
     }, {
-      value: '否',
+      value: 'partTime',
     }];
+    // let if_fulltime_data = [{
+    //   value: '是',
+    // }, {
+    //   value: '否',
+    // }];
     return (
       <View style={styles.container}>
         {/* <Text style={styles.welcome}>Welcome to React Native!</Text> */}
@@ -157,7 +174,7 @@ export default class App extends Component<Props> {
           label='性別'
           data={gender_data}
           valueExtractor={({ value }) => value}
-          value={this.value}
+          value={this.key}
           onChangeText={(value) => {
             this.SEX = value;
           }}

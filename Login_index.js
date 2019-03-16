@@ -11,6 +11,7 @@ import {
   AsyncStorage,
   Alert,
   Button,
+  Linking,
   TouchableOpacity,
 
 } from 'react-native';
@@ -18,10 +19,13 @@ import { createBottomTabNavigator, SafeAreaView, createStackNavigator, withNavig
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box'
 import Btn_Login from './app/page/Login/Btn_Login';
+import Btn_Phone from './app/page/Login/Btn_Phone';
+
 import Login from './app/page/Login/Login';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
+const captchaUrl = 'https://my-fuck-awesome-project.firebaseapp.com/phone-invisible.html'
 
 export default class Login_index extends Component {
 
@@ -41,6 +45,13 @@ export default class Login_index extends Component {
 
     };
   }
+
+  handleClick = () => {
+    Linking.openURL(captchaUrl).catch(err => console.error('An error occurred', err));
+//////開Phone number authentication with invisible ReCaptcha
+
+  };
+
   save() {
     //设置多项
     var keyValuePairs = [['userToken', this.state.userToken]]
@@ -127,6 +138,12 @@ export default class Login_index extends Component {
   }
 
 
+  // save_token_code = () => {
+  //   this.setState({
+  //     token_code: this.props.navigation.state.params,
+  //   }), console.warn("A", this.state.token_code);
+  //   console.warn("B", this.props.navigation.state.params);
+  // }
 
 
 
@@ -141,6 +158,15 @@ export default class Login_index extends Component {
       value: 'Pear',
     }];
 
+    // const {
+    //   navigation: {
+    //     state: {
+    //       params: {
+    //         token_code
+    //       }
+    //     }
+    //   }
+    // } = this.props;
     return (
       // <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -154,7 +180,11 @@ export default class Login_index extends Component {
           <Text style={[styles.title, { fontSize: 30 }]}>    </Text>
           {/* <Text style={[styles.title, { fontSize: 40}]}>Logo</Text> */}
         </View>
-
+        {/* <Button
+          title="handleClick"
+          onPress={() => {
+            this.handleClick();
+          }} />
 
         <Login onPress={() => {
           this.save();
@@ -162,7 +192,7 @@ export default class Login_index extends Component {
           this.setState({ pressStatus: 'pressin' });
           this._storeData();
           this.setStorage();
-        }} />
+        }} /> */}
 
 
         <Button
@@ -177,7 +207,7 @@ export default class Login_index extends Component {
           }} />
          
 
-
+         
           {/* 
         <View style={styles.bottmContainer}>
         <Login/>
@@ -186,9 +216,11 @@ export default class Login_index extends Component {
 
         </View> */}
 
+<Btn_Phone/>
 
 
           < View style={styles.bottmContainer}>
+
           <Btn_Login />
 
       </View>

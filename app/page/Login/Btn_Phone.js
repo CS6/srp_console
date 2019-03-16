@@ -1,22 +1,26 @@
 import React from 'react';
 import { Button,StyleSheet,    AsyncStorage,
-  TouchableOpacity,Image,Alert,Text ,View,Dimensions} from 'react-native';
+  TouchableOpacity,Image,Alert,Text ,View,Dimensions,Linking} from 'react-native';
 import { withNavigation } from 'react-navigation';
 const { width, height } = Dimensions.get('window');
+const captchaUrl = 'https://my-fuck-awesome-project.firebaseapp.com/phone-invisible.html'
 
-class Btn_Login extends React.Component {
+class Btn_Phone extends React.Component {
 
   state = {
     key:'',
     value:'',
     data: '\n',
 }
+handleClick = () => {
+  Linking.openURL(captchaUrl).catch(err => console.error('An error occurred', err));
 
+};
 
 _retrieveData = async () => {
   try {
 
-      this.props.navigation.push('Home') 
+      this.props.navigation.push('Phone') 
 
     
    } catch (error) {
@@ -31,9 +35,9 @@ _retrieveData = async () => {
     return (
     <View>
    
-  <TouchableOpacity onPress={ this._retrieveData}>
+  <TouchableOpacity onPress={ this.handleClick}>
         <View style={styles.Button}>
-          <Text style={styles.searchContent}>登入</Text>
+          <Text style={styles.searchContent}>電話登入</Text>
           {/* <Text style={styles.searchContent}>簽下去</Text> */}
 
         </View>
@@ -75,4 +79,4 @@ const styles = StyleSheet.create({
 
 // withNavigation returns a component that wraps MyBackButton and passes in the
 // navigation prop
-export default withNavigation(Btn_Login);
+export default withNavigation(Btn_Phone);

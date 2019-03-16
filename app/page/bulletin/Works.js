@@ -103,13 +103,18 @@ export default class Works extends Component {
       console.warn(jsonData);
       console.warn(jsonData.excutionResult);
       if (jsonData.excutionResult == "success") {
-        Alert.alert("更新成功");
+        Alert.alert("API成功");
         // this.setState({ refreshing: false });
+        if (jsonData.workAssignment[0] != null) {
+
+          Alert.alert("更新成功");
+
         this.setState({
           refreshing: false,
           workAssignment: jsonData.workAssignment,
           // worker:jsonData.workAssignment[0].worke[0]
         });
+      }
 
         // this.forceUpdate();
       }
