@@ -23,25 +23,7 @@ import { SafeAreaView, } from 'react-navigation';
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 const url = 'https://us-central1-my-fuck-awesome-project.cloudfunctions.net/getLeaveNoteList';
-
-const items_Text = [
-  {
-    name: "標題們",
-    // id: 0,
-    children: [{
-      profile_icon: require('../../img/account.png'),
-      profile_name: "拉互依",
-      leave_type: "假別",
-      leave_start_date: "2019/10/10",
-      leave_end_date: "2019/10/11",
-      leave_start_time: "12:00",
-      leave_end_time: "13:00",
-      leave_desc: "請假理由請假理由請假理由請假理由請假理由",
-      leave_apply_date: "2019/10/11"
-      // id: 20,
-    }]
-  },
-]
+const img = require('../../img/account.png');
 
 export default class Reply extends Component {
   constructor() {
@@ -54,28 +36,23 @@ export default class Reply extends Component {
     };
   }
 
-
   componentDidMount() {
     this.getStorage().done();
 
   }
 
   _onRefresh = () => {
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     this.onPost();
-    // this.setState({refreshing: false});
   }
-  
+
 
   getStorage = async () => {
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
-        console.warn("哈哈"+value);
         this.setState({ userToken: value });
-        // console.warn('Reply', await AsyncStorage.getItem('userToken'));
         this.onPost();
-
       }
     } catch (error) {
       console.log(error);
@@ -121,15 +98,15 @@ export default class Reply extends Component {
     else {
       return (
         <SafeAreaView style={styles.container}>
-       <ScrollView style={styles.Scrollcontainer}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}/>}>            
-              {this.state.leaveNote.map((note) => {
+          <ScrollView style={styles.Scrollcontainer}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh} />}>
+            {this.state.leaveNote.map((note) => {
               return (
                 <CardLeaveList
-                  profile_icon={items_Text[0].children[0].profile_icon}
+                  profile_icon={img}
                   profile_name={note.issuerName}
                   leave_type={note.type}
                   leave_start_date={moment(note.startLeaveTime._seconds * 1000).format("YYYY/MM/DD")}
@@ -152,12 +129,8 @@ export default class Reply extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // flexDirection: 'row',
-    // alignItems: 'center',
+    flex: 1,
     backgroundColor: '#FFFFFF',
-    // padding: 20
   },
   Scrollcontainer: {
     // flex: 1,

@@ -24,18 +24,18 @@ componentWillReceiveProps(nextProps) {
 }
   render() {
     return (
-      <View >
+      <View>
+        <View style={styles.CardTitle}>
+          <Text style={styles.CardTitleText}>{"個人訊息"}</Text>
+        </View>
         <Card body={
-          <View style={{ flex: 1,paddingVertical:15}}>
-            <View style={{ flex: 1, flexDirection: 'column', justifyContent: "flex-start" , alignItems:"flex-start" }}>
-              <Text style={{ fontSize: 16, color: '#4A667C' }}>{"電話號碼：" + this.props.phoneNumber}</Text>
-
-              <Text style={{ fontSize: 16, color: '#4A667C' }}>{"名稱：" + this.props.name}</Text>
-              <Text style={{ fontSize: 16, color: '#4A667C' }}>{"性別：" + this.props.gender}</Text>
-              <Text style={{ fontSize: 16, color: '#4A667C' }}>{"職稱：" + this.props.workingType}</Text>
-              <Text style={{ fontSize: 16, color: '#4A667C' }}>{"常態組別：" + this.props.team}</Text>
-              <Text style={{ fontSize: 16, color: '#4A667C' }}>{"是否全職：" + this.props.verified}</Text>
-            </View>
+          <View style={styles.CardUserInfo}>
+            <Text style={styles.CardUserInfoText}>{"名稱：" + this.props.name}</Text>
+            <Text style={styles.CardUserInfoText}>{"性別：" + this.props.gender}</Text>
+            <Text style={styles.CardUserInfoText}>{"職稱：" + this.props.workingType}</Text>
+            <Text style={styles.CardUserInfoText}>{"電話號碼：" + this.props.phoneNumber}</Text>
+            <Text style={styles.CardUserInfoText}>{"常態組別：" + this.props.team}</Text>
+            <Text style={styles.CardUserInfoText}>{"是否全職：" + this.props.verified}</Text>
           </View>
         } />
       </View>
@@ -43,33 +43,25 @@ componentWillReceiveProps(nextProps) {
   }
 }
 
-
-{/*Ex
-  <CardNotice infoTitle={} infoBody={}/> 
-  <CardNotice infoTitle={msg.announcement[1].title} infoBody={msg.announcement[2].detail}/> 
-
-*/}
-//style={[styles.card]}
-
-
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: width * 0.9,
-    padding: 15,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    marginVertical: 10,
-    shadowColor: '#000000',
-    shadowRadius: 8,
-    shadowOpacity: 0.4,
-    elevation: 8,
-    shadowOffset: {
-      width: 0,
-      height: 4
-    },
-    marginHorizontal: 10,
+  CardTitle: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center'
+  },
+  CardTitleText:{
+    fontSize: 22, 
+    color: '#4A667C'
+  },
+  CardUserInfo: {
+    flex: 1, 
+    flexDirection: 'column', 
+    justifyContent: "flex-start" , 
+    alignItems:"flex-start",
+  }, 
+  CardUserInfoText: { 
+    fontSize: 16, 
+    color: '#4A667C',
+    paddingVertical: 5
   }
 });
