@@ -298,15 +298,15 @@ getStorage = async () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
 
     backgroundColor: '#FFFFFF',
 
   },
   Scrollcontainer:{
     flex: 1,
-    padding:10,
+    // padding:10,
     
     
 
