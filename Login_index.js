@@ -194,7 +194,12 @@ export default class Login_index extends Component {
           this.setStorage();
         }} /> */}
 
+<Button
+          title="新"
+          onPress={() => {
+            Linking.openURL("srpconsole://token/eBuvGEjNMUOo5RrhIs4XQx3hDte2").catch(err => console.error('An error occurred', err));
 
+          }} />
         <Button
           title="新2"
           onPress={() => {

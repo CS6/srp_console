@@ -41,16 +41,16 @@ export default class Works extends Component {
       worker:"",
       workAssignment: [
         {
-          "desc": "範例不工作",
+          "desc": "目前 沒工作",
           "modifyTime": {
             "_seconds": 1552671263,
             "_nanoseconds": 458000000
           },
           "modifyUser": "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
-          "team": "生態組",
+          "team": "睡覺組",
           "worker": [
             "範例不工作",
-            "範例不工作"
+            "範例沒同事"
           ]
         }
       ]
@@ -119,7 +119,7 @@ export default class Works extends Component {
         // this.forceUpdate();
       }
       else {
-        Alert.alert("更新失敗", "請檢查網路");
+        Alert.alert("更新失敗", "請檢查網路或是權限");
         this.setState({ refreshing: false });
         // this.forceUpdate();
       }

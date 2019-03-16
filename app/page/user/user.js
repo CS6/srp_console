@@ -15,6 +15,8 @@ import {
 import Btn_info from "../../components/Btn_info"
 import { SafeAreaView, } from 'react-navigation';
 import CardUserInfo from '../../components/CardUserInfo';
+import Btn_Logout from '../Login/Btn_Logout';
+
 // import CardUserLeave from '../../components/CardUserLeave';
 
 // 取得屏幕的宽高Dimensions
@@ -29,7 +31,8 @@ class Card_Top extends React.Component {
             <View style={styles.card_Top}>
                 <Image style={styles.profileImg} source={img} />
                 <Text style={{ padding: 15, fontSize: 32, color: '#4A667C' }}>{"拉互依"}</Text>
-                <Btn_info />
+                <Btn_Logout/>
+                {/* <Btn_info /> */}
             </View>
         );
     }

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
+import Btn_Login_set from '../Login/Btn_Login_set';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake IOS 878787for dev menu',
@@ -84,30 +85,30 @@ export default class App extends Component<Props> {
         "jobTitle": this.JOB,
         "phoneNumber": this.PH,
 
-        
-          // "gender":"male",
-          // "team":"team101",
-          // "workingType":"fullTime",
-          // "name":"QAQ",
-          // "jobTitle":"ironman",
-          // "phoneNumber":"+886910927898"
-          
-        
+
+        // "gender":"male",
+        // "team":"team101",
+        // "workingType":"fullTime",
+        // "name":"QAQ",
+        // "jobTitle":"ironman",
+        // "phoneNumber":"+886910927898"
+
+
 
 
       })
     }).then((response) => {
-      console.warn(this.SEX,this.NO,this.NY,this.NA,this.JOB,this.PH,)
+      console.warn(this.SEX, this.NO, this.NY, this.NA, this.JOB, this.PH)
 
       return response.json()
     }).then((data) => {
       console.warn(data)
-      if(data.excutionResult == "success") {
-        Alert.alert ("註冊成功");
+      if (data.excutionResult == "success") {
+        Alert.alert("註冊成功");
       }
-    }).catch((err)=> {
-      console.warn('錯誤:',err)
-      Alert.alert ("發送失敗","請檢查網路");
+    }).catch((err) => {
+      console.warn('錯誤:', err)
+      Alert.alert("發送失敗", "請檢查網路");
     });
   }
 
@@ -117,17 +118,17 @@ export default class App extends Component<Props> {
     //   value: '男',key: 'male'
     // }, {
     //   value: '女',key: 'female'
-      
+
     // }];
     let gender_data = [{
-      value: 'male',key: 'male'
+      value: 'male', key: 'male'
     }, {
-      value: 'female',key: 'female'
-      
+      value: 'female', key: 'female'
+
     }];
 
     let group_data = [{
-      value: '房務組',key: '房務組',
+      value: '房務組', key: '房務組',
     }, {
       value: '餐廳組',
     }, {
@@ -203,12 +204,20 @@ export default class App extends Component<Props> {
             this.NY = value;
           }}
         />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.button}
           onPress={this.onPress}
         >
           <Text> 註冊 </Text>
         </TouchableOpacity>
+
+ */}
+
+        <Btn_Login_set onPress={() => {
+
+          this.JSON_Post()
+        }} />
+
         <Button
           title="更新"
           onPress={() => {

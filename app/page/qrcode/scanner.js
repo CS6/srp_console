@@ -213,7 +213,7 @@ export default class Scanner extends Component {
             }} >
               <Text style={styles.buttonText}>{this.state.camera_state}</Text>
               {/* <Text style={styles.buttonText}>{this.props.camera}</Text> */}
-              <Text style={styles.buttonText}>OK. Got it!</Text>
+              {/* <Text style={styles.buttonText}>OK. Got it!</Text> */}
             </TouchableOpacity>
           }
         />)
@@ -239,16 +239,16 @@ export default class Scanner extends Component {
           </Text>
               </View> */}
 
-        <TouchableOpacity style={styles.buttonTouchable}
+        {/* <TouchableOpacity style={styles.buttonTouchable}
           onPress={this.testFun.bind(this)}>
           <Text style={styles.buttonText}>{"OK. Got it!"+this.state.myName}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonTouchable}
           onPress={this.testForceFun.bind(this)} >
           <Text style={styles.buttonText}>{"OK.  it!"+this.state.myName}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-
+{/* 
 
         <Button
           title="send url"
@@ -256,7 +256,7 @@ export default class Scanner extends Component {
             url = data;
             this.setState({ url: url })
           }}
-        />
+        /> */}
 
         {this.renderCamera()}
 

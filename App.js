@@ -26,6 +26,7 @@ import {
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import Btn_setup from './app/page/Login/Btn_setup';
 import Btn_Login from './app/page/Login/Btn_Login';
 
 
@@ -67,115 +68,120 @@ firebase.initializeApp(config);
 type Props = {};
 
 class TokenScreen extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        user: undefined,
-        phone: '+886908668531',
-        confirmationResult: undefined,
-        code: '',
-        token_code: "null",
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: undefined,
+      phone: '+886908668531',
+      confirmationResult: undefined,
+      code: '',
+      token_code: "null",
+    }
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user })
+    })
+  }
+
+
+
+  save_token_code = () => {
+    this.setState({
+      token_code: this.props.navigation.state.params.token_code,
+    }, function () {
+      this.save();
+      console.warn("save")
+    }), console.warn("A", this.state.token_code);
+    console.warn("B", this.props.navigation.state.params.token_code);
+  }
+
+  save() {
+    // console.warn("C", this.state.token_code);
+    //设置多项
+    var keyValuePairs = [['userToken', this.state.token_code]]
+    AsyncStorage.multiSet(keyValuePairs, function (errs) {
+      if (errs) {
+        //TODO：存储出错
+        return;
       }
-      firebase.auth().onAuthStateChanged(user => {
-        this.setState({ user })
-      })
-    }
-   
-  
+      alert('userToken保存成功!');
 
-    save_token_code = () => {
-      this.setState({
-        token_code: this.props.navigation.state.params.token_code,
-      }, function () {
-        this.save();
-        console.warn("save")
-      }), console.warn("A", this.state.token_code);
-      console.warn("B", this.props.navigation.state.params.token_code);
-    }
+    });
+  }
 
-    save() {
-      // console.warn("C", this.state.token_code);
-      //设置多项
-      var keyValuePairs = [['userToken', this.state.token_code]]
-      AsyncStorage.multiSet(keyValuePairs, function (errs) {
-        if (errs) {
-          //TODO：存储出错
-          return;
-        }
-        alert('userToken保存成功!');
 
-      });
-    }
+  componentDidMount() {
+    var _that = this;
+    AsyncStorage.clear(function (err) {
+      if (!err) {
+        _that.setState({
+          name: "",
+          phone: ""
+        });
+        alert('存储的数据已清除完毕!');
+      }
+    });
 
- 
-    componentDidMount() {
-      var _that = this;
-      AsyncStorage.clear(function (err) {
-        if (!err) {
-          _that.setState({
-            name: "",
-            phone: ""
-          });
-          alert('存储的数据已清除完毕!');
-        }
-      });
-  
-    }
-    render() {
-      // const { navigation: { state: { params: { token_code } } } } = this.props;
-      const {
-        navigation: {
-          state: {
-            params: {
-              token_code
-            }
+  }
+  render() {
+    // const { navigation: { state: { params: { token_code } } } } = this.props;
+    const {
+      navigation: {
+        state: {
+          params: {
+            token_code
           }
         }
-      } = this.props;
-  
-  
-  
-      return (
-  
-        <View style={styles.container}>
-          <ScrollView style={{ padding: 20, marginTop: 20 }}>
-  
-            <Text style={styles.welcome}>
-              歡迎
-          </Text>
+      }
+    } = this.props;
+
+
+
+    return (
+
+      <View style={styles.container}>
+        <ScrollView style={{ padding: 20, marginTop: 20 }}>
+
           <Text style={styles.welcome}>
-              請按登入
+            歡迎使用ＳＲＰ
           </Text>
-            <Text style={styles.welcome}>{token_code}</Text>
-  
-            {/* <Button
+
+          <Text style={styles.welcome}>{token_code}</Text>
+
+          {/* <Button
               title='go'
               onPress={() => { this.props.navigation.navigate('Login') }} />
             <Text>Code from SMS Screen</Text>
            
           */}
- 
+          {/*  
             <Button
               onPress={this.save_token_code}
               title="登入"/>
-   
+    */}
 
-            <Btn_Login  onPress={this.save_token_code}/>
+          <View style={{justifyContent: 'center'}}>
+
+            <Text style={styles.welcome}>
+              請按登入
+          </Text>
+            <Btn_Login onPress={this.save_token_code} />
+            <Text style={styles.welcome}>  或是 註冊 </Text>
+            <Btn_setup />
+
+          </View>
 
 
-           
-  
-  
-  
-          </ScrollView>
-  
-        </View>
-  
-      );
-    }
+
+
+        </ScrollView>
+
+      </View>
+
+    );
   }
-  
-  
+}
+
+
 
 class DetailsScreen extends React.Component {
   static navigationOptions = {
@@ -234,14 +240,14 @@ class Welcome extends React.Component {
     this.setState({ phone })
   }
 
- 
+
   handleClick = () => {
     Linking.openURL(captchaUrl).catch(err => console.error('An error occurred', err));
 
   };
 
   render() {
-   
+
 
     return (
       <View style={styles.container}>
@@ -488,7 +494,7 @@ class HomeScreen extends React.Component {
 
 const RootStack = createStackNavigator(
   {
-    Login: { screen: Login_index  },
+    Login: { screen: Login_index },
 
     Home: { screen: HomeScreen },
 
@@ -503,7 +509,7 @@ const RootStack = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
 
   }
 );
@@ -558,7 +564,8 @@ export default App = () => <RootStack uriPrefix={prefix} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   home: {
