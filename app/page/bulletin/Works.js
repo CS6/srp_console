@@ -164,21 +164,21 @@ export default class Works extends Component {
     super();
     this.state = {
       refreshing: false,
-      userToken:"",
+      userToken: "",
+      worker:"",
       workAssignment: [
         {
-          "desc": "砍樹",
+          "desc": "範例不工作",
+          "modifyTime": {
+            "_seconds": 1552671263,
+            "_nanoseconds": 458000000
+          },
           "modifyUser": "778TIlaNHBcW1lwvk3dZ1HuTuPv1",
           "team": "生態組",
-          "worktime": "晚上",
           "worker": [
-            "+886912345679"
-          ],
-          "workType": "生態組",
-          "modifyTime": {
-            "_seconds": 1552572335,
-            "_nanoseconds": 201000000
-          }
+            "範例不工作",
+            "範例不工作"
+          ]
         }
       ]
     };
@@ -222,7 +222,7 @@ export default class Works extends Component {
 
       body: JSON.stringify({
         "uid": this.state.userToken
-
+        // "uid": "778TIlaNHBcW1lwvk3dZ1HuTuPv1"
       })
     }).then((response) => {
       return response.json();
@@ -231,7 +231,13 @@ export default class Works extends Component {
       console.warn(jsonData.excutionResult);
       if (jsonData.excutionResult == "success") {
         Alert.alert("更新成功");
-        this.setState({ refreshing: false });
+        // this.setState({ refreshing: false });
+        this.setState({
+          refreshing: false,
+          workAssignment: jsonData.workAssignment,
+          // worker:jsonData.workAssignment[0].worke[0]
+        });
+
         // this.forceUpdate();
       }
       else {
@@ -241,7 +247,7 @@ export default class Works extends Component {
       }
     }).catch((err) => {
       console.warn('錯誤:', err);
-      Alert.alert("指派失敗", "請檢查網路");
+      Alert.alert("錯誤", "請檢查網路");
       this.setState({ refreshing: false });
       // this.forceUpdate();
     })
@@ -260,7 +266,7 @@ export default class Works extends Component {
   //   }
   // };
 
-  
+
 
   render() {
     return (
@@ -275,9 +281,7 @@ export default class Works extends Component {
 
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {/* <Card_Top/> */}
-
-
-       
+            {/*        
             <Button
               title="新2"
               onPress={() => {
@@ -285,29 +289,34 @@ export default class Works extends Component {
                 this.getStorage().done();
 
               }}
-            />
-
-
-            <CardToDo team={this.state.workAssignment[0].team} desc={this.state.workAssignment[0].desc} />
+            /> */}
+            <CardToDo
+              team={this.state.workAssignment[0].team}
+              desc={this.state.workAssignment[0].desc}
+              worker={
+                this.state.workAssignment[0].worker[0]+" "+
+                this.state.workAssignment[0].worker[1]+" "+
+                this.state.workAssignment[0].worker[2]+" "+
+                this.state.workAssignment[0].worker[3]+" "+
+                this.state.workAssignment[0].worker[4]+" "+
+                this.state.workAssignment[0].worker[5]+" "
+                
+                } />
             <CardMemo />
             <CardShowLog />
             {/* <Card_Body/> */}
             {/* <Card_Button/> */}
             {/* <Text   >Home!</Text>
-<Icon name="battery-full" size={30} color="#6787A0" />
-<Icon name="battery-three-quarters" size={30} color="#900" />
-<Icon name="battery-half" size={30} color="#900" />
-<Icon name="battery-quarter" size={30} color="#900" />
-<Icon name="battery-empty" size={30} color="#900" />
-<Icon name="bed" size={30} color="#900" />
-<Icon name="american-sign-language-interpreting" size={30} color="#777" /> */}
-
+            <Icon name="battery-full" size={30} color="#6787A0" />
+            <Icon name="battery-three-quarters" size={30} color="#900" />
+            <Icon name="battery-half" size={30} color="#900" />
+            <Icon name="battery-quarter" size={30} color="#900" />
+            <Icon name="battery-empty" size={30} color="#900" />
+            <Icon name="bed" size={30} color="#900" />
+            <Icon name="american-sign-language-interpreting" size={30} color="#777" /> */}
           </View>
-
         </ScrollView>
       </SafeAreaView>
-
-
     );
   };
 }

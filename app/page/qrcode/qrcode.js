@@ -177,14 +177,14 @@ export default class qrcode extends Component {
   
         {/* <Image style={styles.background}  source={require('../../img/bkimg/1x/G1.png')} /> */}
         <View style={styles.container}>
-        <Button
+        {/* <Button
               title="新2"
               onPress={() => {
                 // this._retrieveData();
                 this.getStorage().done();
                 // this.get();
               }}
-            />
+            /> */}
 
 {/* <Blink userToken={"this.state.userToken"} /> */}
     <View style={styles.container}>

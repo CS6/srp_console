@@ -9,6 +9,8 @@ import {
     Button,
     ScrollView,
     RefreshControl,
+    AsyncStorage,
+
     Alert 
 } from 'react-native';
 import Btn_info from "../../components/Btn_info"
@@ -277,17 +279,17 @@ export default class User extends Component {
         };
     }
 //页面的组件渲染完毕（render）之后执行
-componentDidMount() {
-    this.JSON_Post();
-  }
-  getDefaultProps(){
-    this.JSON_Post();
+// componentDidMount() {
+//     this.getStorage().done();
+//   }
+//   getDefaultProps(){
+//     this.JSON_Post();
 
-  }
-  componentWillMount()  {
-    this.JSON_Post();
+//   }
+//   componentWillMount()  {
+//     this.JSON_Post();
 
-  }
+//   }
   
   _onRefresh = () => {
     this.setState({refreshing: true});
@@ -296,12 +298,25 @@ componentDidMount() {
       // this.setState({refreshing: false});
   }
 
+  componentDidMount() {
+
+    this.getStorage().done();
+    console.warn('IN the USER' );
+
+
+  }
+
+
   getStorage = async () => {
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
         console.warn(value);
         this.setState({ userToken: value });
+        this.JSON_Post();
+        console.warn('IN the USER2' );
+
+        console.warn('USER', await AsyncStorage.getItem('userToken'));
       }
     } catch (error) {
       console.log(error);
@@ -310,6 +325,8 @@ componentDidMount() {
   
 
   JSON_Post = () => {
+    console.warn(this.state.userToken);
+
     let url = 'https://us-central1-my-fuck-awesome-project.cloudfunctions.net/getUserDetail';
     fetch(url, {
         method: 'POST',
@@ -342,6 +359,7 @@ componentDidMount() {
             // "phoneNumber": this.PH,
 
 
+            // "uid": "778TIlaNHBcW1lwvk3dZ1HuTuPv1"
             "uid": this.state.userToken
 
 
@@ -369,7 +387,7 @@ componentDidMount() {
           }
     }).catch((err) => {
         console.warn('錯誤:', err);
-        Alert.alert("更新失敗", "請檢查網路");
+        Alert.alert("更新失敗錯誤", "請檢查網路");
         this.setState({ refreshing: false });
     })
 }

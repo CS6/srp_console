@@ -18,7 +18,7 @@ export default class CardToDo extends Component {
         <CardColor style={{backgroundColor: '#7094B1'}} body={
           <View style={{ flex: 1,paddingVertical:15 }}>
 
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: "space-around" }}>
+            <View style={{ flex: 1, flexDirection: 'row',width:width*0.8,justifyContent: "space-around" }}>
               <Text style={{ fontSize: 42, color: '#FFFFFF', paddingRight: 15 }}>{this.props.team}</Text>
               <Text style={{ fontSize: 22, color: '#FFFFFF', paddingLeft: 15, paddingVertical: 10 }}>{this.props.desc}</Text>
             </View>
@@ -26,7 +26,7 @@ export default class CardToDo extends Component {
               <Text style={{ fontSize: 22, color: '#FFFFFF', paddingLeft: 15, paddingVertical: 10 }}>{"共事人員"}</Text>
             </View>
             <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: 14, flex: 1, lineHeight: 24, justifyContent: 'center', alignItems: 'center' }}>{"A"}</Text>
+              <Text style={{ fontSize: 14, flex: 1, lineHeight: 24, justifyContent: 'center', alignItems: 'center' }}>{this.props.worker}</Text>
             </View>
 
           </View>
