@@ -203,15 +203,15 @@ export default class Works extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#FFFFFF',
 
 
   },
   Scrollcontainer: {
     flex: 1,
-    padding: 10,
+    // padding: 10,
 
 
 
@@ -251,7 +251,8 @@ const styles = StyleSheet.create({
       height: 4
     },
     marginHorizontal: 10,
-  }, card_Body: {
+  }, 
+  card_Body: {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -288,23 +289,5 @@ const styles = StyleSheet.create({
       height: 4
     },
     marginHorizontal: 10,
-  },
-  ButtonCard: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: width * 0.3,
-    height: width * 0.6,
-    backgroundColor: '#ededed',
-    borderRadius: 15,
-    marginVertical: 10,
-    shadowColor: '#000000',
-    shadowRadius: 8,
-    shadowOpacity: 0.6,
-    elevation: 8,
-    shadowOffset: {
-      width: 0,
-      height: 4
-    }
   },
 });

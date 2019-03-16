@@ -191,7 +191,7 @@ export default class User extends Component {
 const styles = StyleSheet.create({
     Scrollcontainer: {
         flex: 1,
-        padding: 10,
+        // padding: 10,
     },
     container: {
         flex: 1,
@@ -207,12 +207,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: width * 0.9,
+        // width: width * 0.9,
         height: width * 0.2,
         marginVertical: 10,
         borderRadius: 10,
         backgroundColor: '#FFFFFF',
-        marginHorizontal: 10,
+        // marginHorizontal: width * 0.05,
     },
     card_Body: {
         flexDirection: 'column',
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 4
         },
-        marginHorizontal: 10,
+        // marginHorizontal: 10,
     },
     card_Button: {
         flexDirection: 'column',
@@ -250,6 +250,6 @@ const styles = StyleSheet.create({
             width: 0,
             height: 4
         },
-        marginHorizontal: 10,
+        // marginHorizontal: 10,
     },
 });
