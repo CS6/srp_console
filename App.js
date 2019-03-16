@@ -7,7 +7,8 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, 
+import {
+  Platform,
   StyleSheet,
   View,
   Text,
@@ -19,9 +20,13 @@ import { Platform,
   TouchableOpacity,
   Linking,
 } from 'react-native';
-const { width, height } = Dimensions.get('window');
 
-import { createBottomTabNavigator, SafeAreaView,createSwitchNavigator, createStackNavigator,withNavigation } from 'react-navigation';
+
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
+
+import { createBottomTabNavigator, SafeAreaView, createSwitchNavigator, createStackNavigator, withNavigation } from 'react-navigation';
 
 // import Mian from './mian_vue';
 import Mian from './app/index';
@@ -41,7 +46,20 @@ const instructions = Platform.select({
     'Double tap R on your keyboard 9487to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+const { width, height } = Dimensions.get('window');
+const o_captchaUrl = "https://my-fuck-awesome-project.firebaseapp.com/captcha.html?appurl=${Linking.makeUrl('')}"
+const captchaUrl = 'https://my-fuck-awesome-project.firebaseapp.com/phone-invisible.html'
 
+
+const config = {
+  apiKey: "AIzaSyDiWvzSG8kFr2oPLyrLleEmxGxMY3ed5Hw",
+  authDomain: "my-fuck-awesome-project.firebaseapp.com",
+  databaseURL: "https://my-fuck-awesome-project.firebaseio.com",
+  projectId: "my-fuck-awesome-project",
+  storageBucket: "my-fuck-awesome-project.appspot.com",
+  messagingSenderId: "885320638463"
+};
+firebase.initializeApp(config);
 
 type Props = {};
 
@@ -53,6 +71,8 @@ class DetailsScreen extends React.Component {
     title: 'Details',
 
   };
+
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -64,13 +84,13 @@ class DetailsScreen extends React.Component {
 
         />
 
-<Button
+        <Button
           title="console"
           onPress={() => console.warn(this.props)
-        }
+          }
 
         />
-        
+
       </View>
     );
   }
@@ -79,83 +99,251 @@ class DetailsScreen extends React.Component {
 
 class MyBackButton extends React.Component {
   render() {
-    return <Button title="Back" onPress={() => { this.props.navigation.push('Details')}} />;
+    return <Button title="Back" onPress={() => { this.props.navigation.push('Details') }} />;
   }
 }
 class Welcome extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: undefined,
+      phone: '',
+      confirmationResult: undefined,
+      code: ''
+    }
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user })
+    })
+  }
+  onPhoneChange = (phone) => {
+    this.setState({ phone })
+  }
+
+ 
+  handleClick = () => {
+    Linking.openURL(captchaUrl).catch(err => console.error('An error occurred', err));
+
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome
+
+        <ScrollView style={{ padding: 20, marginTop: 20 }}>
+          <Text style={styles.welcome}>
+            Welcome
         </Text>
-        <Button
-          title='go'
-          onPress={() => { this.props.navigation.navigate('Welcome1') }}
-        />
+          <Button
+            title='go'
+            onPress={() => { this.props.navigation.navigate('Welcome1') }} />
+          <Text>phone Screen</Text>
+          <TextInput
+            value={this.state.phone}
+            onChangeText={this.onPhoneChange}
+            keyboardType="phone-pad"
+            placeholder="Your phone"
+          />
+          <Button
+            onPress={this.handleClick}
+            title="Next"
+          />
+          <TouchableOpacity onPress={this.handleClick}>
+            <View style={styles.button}>
+              <Text style={styles.text}>Open {this.props.url}</Text>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     );
   }
 }
 
 class Welcome1 extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: undefined,
+      phone: '+886908668531',
+      confirmationResult: undefined,
+      code: '',
+      token_code: "null",
+    }
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user })
+    })
+  }
+  /////////_________------------------
+  onPhoneComplete = async () => {
+    let token = null
+    // const listener = ({ url }) => {
+    //   // WebBrowser.dismissBrowser()
+    //   const tokenEncoded = Linking.parse(url).queryParams['token']
+    //   if (tokenEncoded)
+    //     token = decodeURIComponent(tokenEncoded)
+    // }
+    // Linking.addEventListener('url', listener)
+    // await Linking.openURL(o_captchaUrl).catch(err => console.error('An error occurred', err));
+
+    // // await WebBrowser.openBrowserAsync(o_captchaUrl)
+    // Linking.removeEventListener('url', listener)
+    token = decodeURIComponent(this.state.token_code)
+    if (token) {
+      //fake firebase.auth.ApplicationVerifier
+      const captchaVerifier = {
+        type: 'recaptcha',
+        verify: () => Promise.resolve(token)
+      }
+      try {
+        const confirmationResult = await firebase.auth().signInWithPhoneNumber(this.state.phone, captchaVerifier)
+        this.setState({ confirmationResult })
+      } catch (e) {
+        console.warn(e)
+      }
+
+    }
+  }
+  /////////_________------sdf------------
+  onCodeChange = (code) => {
+    // this.setState({ code })
+    this.setState({
+      code
+    }, function () {
+      // console.warn(code)
+    });
+  }
+  onSignIn = async () => {
+    const { confirmationResult, code } = this.state
+    try {
+      await confirmationResult.confirm(code)
+    } catch (e) {
+      console.warn(e)
+    }
+    this.reset()
+  }
+  reset = () => {
+    this.setState({
+      phone: '',
+      phoneCompleted: false,
+      confirmationResult: undefined,
+      code: ''
+    })
+  }
+  test = () => {
+    this.setState({
+      token_code: this.props.navigation.state.params,
+    }), console.warn("A", this.state.token_code);
+    console.warn("B", this.props.navigation.state.params);
+  }
+
+
   render() {
+    // const { navigation: { state: { params: { token_code } } } } = this.props;
+    const {
+      navigation: {
+        state: {
+          params: {
+            token_code
+          }
+        }
+      }
+    } = this.props;
+
+
+
     return (
+
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome1
+        <ScrollView style={{ padding: 20, marginTop: 20 }}>
+
+          <Text style={styles.welcome}>
+            Welcome1
         </Text>
-        <Button
-          title='go'
-          onPress={() => { this.props.navigation.navigate('Login') }}
-        />
+          <Text style={styles.welcome}>{token_code}</Text>
+
+          <Button
+            title='go'
+            onPress={() => { this.props.navigation.navigate('Login') }} />
+          <Text>Code from SMS Screen</Text>
+          <TextInput
+            value={this.state.code}
+            onChangeText={this.onCodeChange}
+            keyboardType="numeric"
+            placeholder="Code from SMS"
+          />
+          <Button
+            onPress={this.onPhoneComplete}
+            title="onPhoneComplete in"
+          />
+
+          <Button
+            onPress={this.onSignIn}
+            title="Sign in"
+          />
+
+          <Button
+            onPress={this.test}
+            title="test in"
+          />
+
+
+
+        </ScrollView>
+
       </View>
+
     );
   }
 }
+
+
+
+
+
+
 // export default withNavigation(MyBackButton);
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
     // headerTitle instead of title
     // tabBarComponent: <TTOOPP />,
-      headerTitle:<Btn_Search/>,
+    headerTitle: <Btn_Search />,
     //  headerTitle:<Text >FUCK</Text>,
     headerStyle: {
       // backgroundColor: '#f4511e',
       backgroundColor: '#7592A9',
-          ///上方tab bar 顏色 iphone X 上瀏海 顏色
+      ///上方tab bar 顏色 iphone X 上瀏海 顏色
 
-      activeTintColor: '#2562b4',      
-      },
-      indicatorStyle: {
-        height: 1,
+      activeTintColor: '#2562b4',
+    },
+    indicatorStyle: {
+      height: 1,
     }, // android 中TabBar下面会显示一条线，高度设为 0 后就不显示线了， 不知道还有没有其它方法隐藏？？？
-    headerColor:"red",
-     headerLeft: (  //定义导航栏右侧的按钮
+    headerColor: "red",
+    headerLeft: (  //定义导航栏右侧的按钮
       // <Text style={{width:1}}></Text>
-      <Btn_Qrcode/>
+      <Btn_Qrcode />
 
-      ),
-      headerMode:'screen',
-      headerTitleStyle:{flex:1, alignItems: 'center',textAlign: 'center',justifyContent: 'center'},
+    ),
+    headerMode: 'screen',
+    headerTitleStyle: { flex: 1, alignItems: 'center', textAlign: 'center', justifyContent: 'center' },
 
-      // headerLeftContainerStyle: {paddingRight: 100},
-      headerRight:(  //定义导航栏右侧的按钮
-        // <Text style={{width:1}}></Text>
-        <Btn_Remind/>
-  
-        ),
-        
-  //  headerTitle:  
-  //   <Button
-  //   title="Go to Details"
-  //   onPress={() => console.warn(DetailsScreen())}
-  // />
-//<Btn_Qrcode/>
+    // headerLeftContainerStyle: {paddingRight: 100},
+    headerRight: (  //定义导航栏右侧的按钮
+      // <Text style={{width:1}}></Text>
+      <Btn_Remind />
+
+    ),
+
+    //  headerTitle:  
+    //   <Button
+    //   title="Go to Details"
+    //   onPress={() => console.warn(DetailsScreen())}
+    // />
+    //<Btn_Qrcode/>
     //title: 'Details',
 
-};
+  };
 
 
 
@@ -165,16 +353,16 @@ class HomeScreen extends React.Component {
       // <SafeAreaView style={styles.container}>
 
       <View style={styles.container}>
-       
 
-          {/* <View style={styles.home}> */}
-          <Mian/> 
-          {/* <Login_index/> */}
-          {/* <Button
+
+        {/* <View style={styles.home}> */}
+        <Mian />
+        {/* <Login_index/> */}
+        {/* <Button
     title="Go to Details"
     onPress={() => this.props.navigation.push('Details')}
   /> */}
-          {/* </View> */}
+        {/* </View> */}
 
       </View>
       //</SafeAreaView> 
@@ -184,44 +372,67 @@ class HomeScreen extends React.Component {
 
 const RootStack = createStackNavigator(
   {
-    Login:{screen:Login_index},
+    Login: { screen: Login_index },
 
-    Home:{ screen: HomeScreen } ,
-    
-    QRvue:{ screen: QRvue},
-    Setup:{screen:Setup},
+    Home: { screen: HomeScreen },
 
-    Details:{ screen: DetailsScreen},
-    
+    QRvue: { screen: QRvue },
+    Setup: { screen: Setup },
+
+    Details: { screen: DetailsScreen },
+
   },
   {
     initialRouteName: 'Login',
-    
+
   }
 );
 
-const Hello_Stack = createSwitchNavigator({
-  Welcome,
-  Welcome1,
-  App: RootStack
-})
+const prefix = 'srpconsole://';
 
+//srpconsole://token/<code>
 
+const Hello_Stack = createStackNavigator(
+  {
 
-export default class App extends Component<Props> {
+    Home: { screen: Welcome },
 
+    App: { screen: RootStack },
+    phone: {
+      screen: Welcome1,
+      path: 'token/:token_code',
+    },
+  },
+  {
+    initialRouteName: 'Home',
 
-  render() {
-    return (
-      // <Hello_Stack onNavigationStateChange={(prevState, currentState) => { console.log(currentState) }} />
-                // <Hello_Stack />
-<SafeAreaView style={{flex: 1, backgroundColor: 'red'}} forceInset={{ bottom: 'never' ,top: 'never' }}>
-                  <RootStack />
-                  </SafeAreaView>
-
-    );
   }
-}
+);
+
+// const Hello_Stack = createSwitchNavigator({
+//   Welcome,
+//   Welcome1,
+//   App: RootStack
+// })
+
+export default App = () => <Hello_Stack uriPrefix={prefix} />;
+
+
+// export default class App extends Component<Props> {
+
+
+//   render() {
+//     return (
+//       // <Hello_Stack onNavigationStateChange={(prevState, currentState) => { console.log(currentState) }} />
+//       // <Hello_Stack />
+//       <SafeAreaView style={{ flex: 1, backgroundColor: 'red' }} forceInset={{ bottom: 'never', top: 'never' }}>
+//         <Hello_Stack />
+//         {/* <RootStack /> */}
+//       </SafeAreaView>
+
+//     );
+//   }
+// }
 
 ////消除多餘安全邊距 https://reactnavigation.org/docs/zh-Hans/handling-iphonex.html
 const styles = StyleSheet.create({
@@ -235,7 +446,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
-  
+
   logo: {
     height: 120,
     marginBottom: 16,

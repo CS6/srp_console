@@ -143,33 +143,25 @@ export default class Login_index extends Component {
 
     return (
       // <SafeAreaView style={styles.container}>
-
       <View style={styles.container}>
         <Image style={styles.background} source={{ uri: 'https://unsplash.it/800/600?random&blur' }} />
-
         {/* <Image style={styles.background} source={{ uri: 'https://unsplash.it/800/600?image=102&blur' }} /> */}
         <View style={styles.container}>
           {/* <Btn_Login/> */}
-
-
           <Text style={[styles.title, { fontSize: 90 }]}>司馬庫斯</Text>
           <Text style={[styles.title, { fontSize: 40 }]}>    </Text>
           <Text style={[styles.title, { fontSize: 40 }]}>資訊管理系統</Text>
           <Text style={[styles.title, { fontSize: 30 }]}>    </Text>
-
-
           {/* <Text style={[styles.title, { fontSize: 40}]}>Logo</Text> */}
         </View>
 
 
         <Login onPress={() => {
           this.save();
-
           pressStatus = 'pressin'
           this.setState({ pressStatus: 'pressin' });
           this._storeData();
           this.setStorage();
-
         }} />
 
 

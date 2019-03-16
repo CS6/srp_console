@@ -15,7 +15,7 @@ import {
 import Btn_info from "../../components/Btn_info"
 import { SafeAreaView, } from 'react-navigation';
 import CardUserInfo from '../../components/CardUserInfo';
-import CardUserLeave from '../../components/CardUserLeave';
+// import CardUserLeave from '../../components/CardUserLeave';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
