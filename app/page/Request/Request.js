@@ -259,7 +259,7 @@ class ApplyLeaveForm extends React.Component {
         </View>
         <Modal 
           animationType="fade"
-          transparent="true"
+          transparent={true}
           visible={this.state.startModalVisible}>
           <View style={styles.calendarModal}>
             <View style={styles.calendarPicker}>
@@ -279,7 +279,6 @@ class ApplyLeaveForm extends React.Component {
         </Modal>
         <Modal 
           animationType="fade"
-          transparent="true"
           visible={this.state.endModalVisible}>
           <View style={styles.calendarModal}>
             <View style={styles.calendarPicker}>
@@ -328,20 +327,21 @@ export default class Request extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
     backgroundColor: '#FFFFFF',
+    // padding: 40
   }, 
   Scrollcontainer: {
-    flex: 1,
-    padding: 80
+    // flex: 1,
+    // padding: 40
   },
   formContent:{
-    flex: 1,
+    // flex: 1,
     // flexDirection: "column",
     // alignItems: "center",
-    marginVertical: 30,
+    margin: 30,
   },
   formProfileSection:{
     flexDirection: 'row',
@@ -405,15 +405,15 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
   leaveSubmitBtn:{
-    borderRadius: 40,
+    borderRadius: 10,
     borderWidth: 1,
     backgroundColor: '#98BFDE',
     borderColor: '#98BFDE',
   },
   leaveSubmitText:{
     color: '#FFFFFF',
-    fontSize: 20,
-    padding: 15
+    fontSize: 18,
+    padding: 10
   }
 
 });

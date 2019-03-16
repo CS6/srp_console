@@ -126,7 +126,7 @@ export default class CardLeave extends Component {
               </View>
               <Modal
                 animationType="fade"
-                transparent="true"
+                transparent={true}
                 visible={this.state.modalApprovalVisible}
                 onRequestClose={() => {
                   Alert.alert("Modal has been closed.");
@@ -156,7 +156,7 @@ export default class CardLeave extends Component {
               </Modal>
               <Modal
                 animationType="fade"
-                transparent="true"
+                transparent={true}
                 visible={this.state.modalDisapprovalVisible}
                 onRequestClose={() => {
                   Alert.alert("Modal has been closed.");
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   cardItemImg: {
-    flex: 1,
+    flex: 0.5,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     color: '#6787A0'
   },
   cardButtonSection: {
-    flex:1,
+    flex:0.8,
     alignItems: "center",
     // flexDirection: 'column',
     // justifyContent: 'space-between',

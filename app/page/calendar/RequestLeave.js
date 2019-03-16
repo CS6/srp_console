@@ -154,7 +154,7 @@ export default class RequestLeave extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#FFFFFF',
 
     // justifyContent: 'center',
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     // padding: 20
   },
   Scrollcontainer: {
-    flex: 1,
-    padding: 10
+    // flex: 1,
+    // padding:10
   },
 });

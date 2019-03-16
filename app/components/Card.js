@@ -30,9 +30,9 @@ export default class Card extends Component {
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'column',
+    // flexDirection: 'column',
     // alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     width: width * 0.9,
     padding: 15,
     backgroundColor: '#FFFFFF',
@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
       width: 0,
       height: 4
     },
-    marginHorizontal: 10,
+    marginHorizontal: width * 0.05,
   }
 });

@@ -152,14 +152,16 @@ export default class Reply extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // justifyContent: 'center',
+    // flexDirection: 'row',
     // alignItems: 'center',
     backgroundColor: '#FFFFFF',
     // padding: 20
   },
   Scrollcontainer: {
-    flex: 1,
-    padding: 10,
+    // flex: 1,
+    // flexDirection:'row',
+    // padding: 10,
   },
 });

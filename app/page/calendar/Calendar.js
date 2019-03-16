@@ -112,14 +112,14 @@ export default class Calendar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
   tabBarUnderline: {
     backgroundColor: '#2562b4',
     height: 3,
-    width: width / 3,
+    // width: width / 3,
     // marginLeft: 6
   }
 });
